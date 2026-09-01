@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>南一八上　英語學習站</title>
+<style>
+:root{
+  /* 底：帶一點暖度的米白，不是純灰 */
+  --bg:#f2f6f5; --bg2:#eaf1f2; --card:#ffffff; --ink:#1f2933; --dim:#5c6b7a; --line:#dfe7e8;
+  /* 主色仍是沉穩青綠，但整站改用四個輔色輪替，避免單調 */
+  --brand:#2b7a78; --brand2:#3aafa9; --deep:#17403f;
+  --c1:#2b7a78;  --c1b:#e8f4f3;   /* 青綠 */
+  --c2:#3d6f9e;  --c2b:#e9f1f8;   /* 靛藍 */
+  --c3:#7a5ea7;  --c3b:#f1ecf8;   /* 紫 */
+  --c4:#b3763a;  --c4b:#fbf0e5;   /* 琥珀 */
+  --c5:#a45c74;  --c5b:#faecf0;   /* 玫瑰 */
+  --ok:#2f855a; --okbg:#e6f4ea; --bad:#b45309; --badbg:#fdf1e3;
+  --hi:#eef6f5; --soft:#f7fbfa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);background-attachment:fixed;color:var(--ink);
+     font:16px/1.85 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+header{background:linear-gradient(115deg,#17403f 0%,#2b7a78 38%,#3d6f9e 72%,#7a5ea7 100%);
+        color:#fff;padding:20px 16px 16px;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;
+        border-radius:50%;background:rgba(255,255,255,.10)}
+header h1{margin:0;font-size:19px;letter-spacing:.5px;font-weight:800}
+header p{margin:6px 0 0;font-size:13px;opacity:.94}
+header p.ver{font-size:11.5px;opacity:.72;margin-top:8px}
+.wrap{max-width:840px;margin:0 auto;padding:0 14px 70px}
+.tabs{display:flex;gap:6px;position:sticky;top:0;z-index:9;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line)}
+.tab{flex:1;padding:11px 6px;text-align:center;border:1px solid var(--line);border-radius:10px;
+     background:var(--card);cursor:pointer;font-weight:700;font-size:14.5px;color:var(--dim)}
+.tab.on{color:#fff}
+.tab[data-tab="tb"].on{background:var(--c1);border-color:var(--c1)}
+.tab[data-tab="ex"].on{background:var(--c2);border-color:var(--c2)}
+.tab[data-tab="wd"].on{background:var(--c4);border-color:var(--c4)}
+.tab[data-tab="qz"].on{background:var(--c3);border-color:var(--c3)}
+.lsw{display:flex;gap:8px;margin:14px 0 4px}
+.lsw button{flex:1;padding:10px;border:1px solid var(--line);background:var(--card);
+            border-radius:10px;font-weight:700;color:var(--dim);cursor:pointer;font-size:14.5px}
+.lsw button.on{color:#fff}
+.lsw button[data-lesson="L1"].on{background:var(--c1);border-color:var(--c1)}
+.lsw button[data-lesson="L2"].on{background:var(--c2);border-color:var(--c2)}
+.lsw button[data-lesson="R1"].on{background:var(--c4);border-color:var(--c4)}
+.lhead{border:1px solid var(--line);border-left:6px solid var(--brand);border-radius:12px;padding:12px 14px;margin:10px 0 14px}
+.tone-L1 .lhead{background:var(--c1b);border-left-color:var(--c1)}
+.tone-L2 .lhead{background:var(--c2b);border-left-color:var(--c2)}
+.tone-R1 .lhead{background:var(--c4b);border-left-color:var(--c4)}
+.tone-L1 .lhead b{color:var(--c1)} .tone-L2 .lhead b{color:var(--c2)} .tone-R1 .lhead b{color:var(--c4)}
+.lhead b{display:block;font-size:16px;color:var(--deep)}
+.lhead span{font-size:13px;color:var(--dim)}
+.unit{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--a,var(--brand));
+      border-radius:12px;margin:10px 0;overflow:hidden;box-shadow:0 1px 3px rgba(23,64,63,.06)}
+.unit.c1{--a:var(--c1);--ab:var(--c1b)}
+.unit.c2{--a:var(--c2);--ab:var(--c2b)}
+.unit.c3{--a:var(--c3);--ab:var(--c3b)}
+.unit.c4{--a:var(--c4);--ab:var(--c4b)}
+.unit[open]>summary{background:var(--ab);border-bottom:1px solid var(--line)}
+.unit.final{--a:var(--c5);--ab:var(--c5b);border-color:var(--c5);box-shadow:0 0 0 2px rgba(164,92,116,.16)}
+.unit summary{list-style:none;cursor:pointer;padding:14px;display:flex;align-items:center;gap:11px;font-weight:700}
+.unit summary::-webkit-details-marker{display:none}
+.ic{font-size:17px;color:#fff;background:var(--a,var(--brand));width:30px;height:30px;flex:none;
+    border-radius:9px;display:grid;place-items:center;font-weight:800}
+.ut{flex:1;line-height:1.5}
+.ut small{display:block;font-weight:400;font-size:12.5px;color:var(--dim)}
+.chk{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none}
+.chk.done{background:var(--ok);border-color:var(--ok);position:relative}
+.chk.done::after{content:"✓";color:#fff;font-size:14px;position:absolute;left:4px;top:-3px}
+.ubody{padding:2px 14px 16px;border-top:1px solid var(--line)}
+.lead{background:var(--ab,var(--hi));border-left:3px solid var(--a,var(--brand2));padding:10px 12px;border-radius:0 8px 8px 0;margin:14px 0}
+.talk{background:var(--soft);border-radius:10px;padding:11px 13px;margin:10px 0;border:1px solid var(--line)}
+h4{margin:20px 0 6px;font-size:15.5px;color:var(--a,var(--deep));border-left:4px solid var(--a,var(--brand2));padding-left:9px}
+p{margin:8px 0}
+.eg{display:block;background:#f2f7f7;border:1px solid var(--line);border-radius:8px;
+    padding:8px 11px;margin:6px 0;font-size:14.5px;line-height:1.8}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:360px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--ab,var(--hi));font-weight:700;color:var(--a,var(--deep))}
+.donebtn{margin-top:18px;width:100%;padding:11px;border:0;border-radius:10px;background:var(--ok);
+         color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.donebtn.off{background:#9fb3ad}
+.gate{background:var(--hi);border:1px solid var(--brand2);border-radius:12px;padding:13px;margin:12px 0;font-size:14.5px}
+.stages{display:grid;gap:10px;margin:12px 0}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;
+       display:flex;align-items:center;gap:12px;cursor:pointer}
+.stage.lock{opacity:.5;cursor:not-allowed}
+.sno{width:34px;height:34px;border-radius:50%;background:var(--a,var(--brand));color:#fff;
+     display:grid;place-items:center;font-weight:700;flex:none}
+.stage.s1{--a:var(--c1);--ab:var(--c1b)} .stage.s2{--a:var(--c2);--ab:var(--c2b)}
+.stage.s3{--a:var(--c3);--ab:var(--c3b)} .stage.s4{--a:var(--c4);--ab:var(--c4b)}
+.stage.s5{--a:var(--c5);--ab:var(--c5b)}
+.stage{border-left:5px solid var(--a,var(--line))}
+.stage:hover{background:var(--ab,#fff)}
+.stage.lock .sno{background:#9fb3ad}
+.sinfo{flex:1}.sinfo b{display:block}.sinfo span{font-size:13px;color:var(--dim)}
+.badge{font-size:12px;padding:3px 9px;border-radius:20px;background:#e8eeee;color:var(--dim);white-space:nowrap}
+.badge.pass{background:var(--okbg);color:var(--ok)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+.qhead{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:8px}
+.qtext{font-size:16.5px;font-weight:600;margin:6px 0 14px;line-height:1.9}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1px solid var(--line);
+     border-radius:10px;background:#fff;font-size:15px;cursor:pointer;line-height:1.65}
+.opt:hover{border-color:var(--brand2)}
+.opt.right{background:var(--okbg);border-color:var(--ok);font-weight:700}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.exp{margin-top:12px;padding:12px;border-radius:10px;background:var(--hi);border-left:3px solid var(--brand2);font-size:14.5px}
+.exp .pt{font-size:12px;color:var(--dim);margin-top:6px}
+.nav{display:flex;gap:8px;margin-top:14px}
+.nav button{flex:1;padding:12px;border:0;border-radius:10px;background:var(--brand);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.nav button.ghost{background:#fff;color:var(--dim);border:1px solid var(--line)}
+.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));width:0}
+.res{text-align:center;padding:18px}
+.res .big{font-size:42px;font-weight:800;background:linear-gradient(90deg,var(--c1),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrongbox{text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px}
+.wrongbox li{margin:9px 0;font-size:14px}
+
+.media{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--c5);
+       border-radius:12px;padding:14px;margin:16px 0}
+.media>b{display:block;margin-bottom:4px;color:var(--c5)}
+.media p{font-size:13.5px;color:var(--dim);margin:6px 0}
+.mlink{display:block;padding:11px 13px;margin:8px 0;border:1px solid var(--line);border-radius:10px;
+       background:var(--c5b);color:var(--ink) !important;font-weight:700;font-size:14.5px;text-decoration:none}
+.mlink:hover{border-color:var(--c5)}
+.mnote{font-size:12.5px;color:var(--dim);margin-top:10px;line-height:1.8}
+
+/* ── 單字練習 ── */
+.wsel{display:flex;align-items:center;gap:10px;margin:12px 0}
+.wsel label{font-weight:700;color:var(--dim);font-size:14px}
+.wsel select{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:#fff}
+.modes{display:grid;gap:10px;margin:12px 0}
+.mode{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--a);border-radius:12px;
+      padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 1px 3px rgba(23,64,63,.06)}
+.mode:hover{background:var(--ab)}
+.mode.m1{--a:var(--c1);--ab:var(--c1b)} .mode.m2{--a:var(--c2);--ab:var(--c2b)}
+.mode.m3{--a:var(--c3);--ab:var(--c3b)} .mode.m4{--a:var(--c4);--ab:var(--c4b)}
+.mico{width:38px;height:38px;border-radius:11px;background:var(--a);color:#fff;flex:none;
+      display:grid;place-items:center;font-size:19px}
+.minfo{flex:1}.minfo b{display:block;font-size:15.5px}.minfo span{font-size:13px;color:var(--dim)}
+.wcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0}
+.wword{font-size:34px;font-weight:800;letter-spacing:.5px;text-align:center;margin:6px 0 2px;color:var(--deep)}
+.wpos{text-align:center;color:var(--dim);font-size:14px;margin-bottom:6px}
+.wzh{text-align:center;font-size:19px;font-weight:700;margin:8px 0}
+.wex{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0;line-height:1.9}
+.wex .en{font-size:16px}
+.wex .zh{color:var(--dim);font-size:14px;margin-top:4px}
+.wex .src{color:#93a0ad;font-size:11.5px;margin-top:6px}
+.spk{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.spk button{padding:10px 14px;border:1px solid var(--line);background:#fff;border-radius:10px;
+            font-size:14.5px;cursor:pointer;font-weight:700;color:var(--dim)}
+.spk button.main{background:var(--c1);color:#fff;border-color:var(--c1)}
+.sp-in{width:100%;padding:14px;font-size:22px;text-align:center;letter-spacing:2px;
+       border:2px solid var(--line);border-radius:12px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.sp-in:focus{outline:none;border-color:var(--c4)}
+.sp-hint{text-align:center;font-size:22px;letter-spacing:6px;color:var(--dim);
+         font-family:ui-monospace,Menlo,Consolas,monospace;margin:10px 0}
+.heard{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:10px;margin:10px 0;font-size:14.5px}
+.mic{display:grid;place-items:center;width:74px;height:74px;border-radius:50%;background:var(--c2);
+     color:#fff;font-size:30px;margin:14px auto;border:0;cursor:pointer}
+.mic.rec{background:var(--c5);animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.tip{font-size:13px;color:var(--dim);text-align:center;margin:8px 0}
+.hide{display:none}
+footer{text-align:center;color:var(--dim);font-size:12px;padding:26px 10px;line-height:1.9}
+</style>
+</head>
+<body>
+<header>
+  <h1>南一版　國中英語　第三冊（八年級上學期）</h1>
+  <p>Lesson 1（課本 p.1–16）・Lesson 2（課本 p.17–32）・Review 1（p.33–36）</p>
+  <p class="ver">版本 2026-09-02 07:16　｜　若畫面沒更新，請按 Ctrl+F5 重新整理</p>
+</header>
+<div class="wrap">
+  <div class="tabs">
+    <div class="tab on" data-tab="tb">📘 課本教學</div>
+    <div class="tab" data-tab="ex">🔍 會考重點</div>
+    <div class="tab" data-tab="wd">🔤 單字練習</div>
+    <div class="tab" data-tab="qz">✏️ 小考</div>
+  </div>
+
+  <section id="tb">
+    <div class="lsw">
+      <button class="on" data-lesson="L1">Lesson 1</button>
+      <button data-lesson="L2">Lesson 2</button>
+      <button data-lesson="R1">Review 1</button>
+    </div>
+    
+      <div class="lesson-pane tone-L1" data-lesson="L1" >
+        <div class="lhead"><b>Lesson 1　We Visited Our Relatives Yesterday</b><span>課本 p.1–16　主題：想念過世的親人、墨西哥亡靈節</span></div>
+        
+        <details class="unit c1" data-uid="L1-單字" open>
+          <summary><span class="ic">①</span>
+            <span class="ut">單字<small>課本 p.4、p.6、p.8</small></span>
+            <span class="chk" data-done="L1-單字"></span></summary>
+          <div class="ubody">
+            <p class='talk'>我們先看單字。這一課有四十幾個字，如果你一個一個背，背到第十個就會忘記第一個。但你注意看課名：<b>We Visited Our Relatives Yesterday</b>——這一課從頭到尾都在講「昨天、以前」，所以單字可以照「用途」分成三堆，一堆一堆記。</p>
+<h4>第一堆：會拿來講「以前做過什麼」的動詞</h4>
+<div class='tw'><table><thead><tr><th>單字</th><th>詞性</th><th>中文</th><th>過去式</th></tr></thead><tbody>
+<tr><td>study</td><td>v.</td><td>研讀</td><td>studied</td></tr>
+<tr><td>jog</td><td>v.</td><td>慢跑</td><td>jogged</td></tr>
+<tr><td>watch</td><td>v.</td><td>觀看</td><td>watched</td></tr>
+<tr><td>share</td><td>v.</td><td>分享</td><td>shared</td></tr>
+<tr><td>plant</td><td>v.</td><td>種植</td><td>planted</td></tr>
+<tr><td>place</td><td>v.</td><td>放置</td><td>placed</td></tr>
+<tr><td>prepare</td><td>v.</td><td>準備</td><td>prepared</td></tr>
+<tr><td>remember</td><td>v.</td><td>記得</td><td>remembered</td></tr>
+</tbody></table></div>
+<p class='talk'>這一堆<b>全部都是規則動詞</b>，過去式就是加 -ed（study 要去 y 加 ied、jog 要雙寫 g）。為什麼課本把這些字放在這一課？因為等一下文法教過去式，就是拿它們來練。</p>
+<h4>第二堆：家人與回憶</h4>
+<div class='tw'><table><thead><tr><th>單字</th><th>詞性</th><th>中文</th></tr></thead><tbody>
+<tr><td>parents</td><td>n.</td><td>父母親</td></tr>
+<tr><td>grandparents</td><td>n.</td><td>祖父母</td></tr>
+<tr><td>relative</td><td>n.</td><td>親戚；親屬</td></tr>
+<tr><td>memory</td><td>n.</td><td>回憶；記憶</td></tr>
+<tr><td>together</td><td>adv.</td><td>一起</td></tr>
+<tr><td>sweet</td><td>adj.</td><td>貼心的；甜的</td></tr>
+<tr><td>death</td><td>n.</td><td>死亡</td></tr>
+<tr><td>dead</td><td>adj.</td><td>死亡的</td></tr>
+</tbody></table></div>
+<p class='talk'>這裡有兩個字特別容易搞混：<b>death 是名詞</b>（死亡這件事）、<b>dead 是形容詞</b>（死掉的）。課文說 <i>a movie about death</i>（一部關於死亡的電影）用名詞；<i>their dead relatives</i>（他們過世的親人）用形容詞。考試很愛考這一組。</p>
+<h4>第三堆：亡靈節主題字</h4>
+<div class='tw'><table><thead><tr><th>單字</th><th>中文</th></tr></thead><tbody>
+<tr><td>ghost</td><td>鬼</td></tr>
+<tr><td>tomb</td><td>墳墓</td></tr>
+<tr><td>candle</td><td>蠟燭</td></tr>
+<tr><td>flower</td><td>花</td></tr>
+<tr><td>candy</td><td>糖果</td></tr>
+<tr><td>meal</td><td>餐</td></tr>
+<tr><td>music</td><td>音樂</td></tr>
+<tr><td>circle</td><td>圓圈</td></tr>
+<tr><td>sweep</td><td>清掃（過去式 swept）</td></tr>
+<tr><td>lively</td><td>充滿活力的</td></tr>
+<tr><td>touching</td><td>感人的</td></tr>
+<tr><td>fear</td><td>害怕</td></tr>
+<tr><td>story</td><td>故事</td></tr>
+<tr><td>later</td><td>之後</td></tr>
+</tbody></table></div>
+<p class='talk'>這一堆是<b>讀懂課文用的</b>。老實說，這些字在會考的單字題幾乎沒出現過——但課文讀不懂，後面的閱讀測驗一樣拿不到分。所以要背，只是心裡要知道它們的用途不一樣。</p>
+            <button class="donebtn" data-uid="L1-單字">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c2" data-uid="L1-片語" >
+          <summary><span class="ic">②</span>
+            <span class="ut">片語<small>課本 p.4、p.6</small></span>
+            <span class="chk" data-done="L1-片語"></span></summary>
+          <div class="ubody">
+            <p class='talk'>片語比單字更容易考，因為它「不能照字面翻」。這一課有六個，我一個一個講為什麼。</p>
+<h4>pass away　過世</h4>
+<p class='talk'>字面是「經過、離開」，但意思是<b>過世</b>。課文為什麼不直接用 die？因為 <b>pass away 比較委婉</b>，中文就像「走了」而不是「死了」。Tom 在講自己的祖父，當然會用委婉的講法。過去式是 passed away。</p>
+<h4>look after　照顧</h4>
+<p class='talk'>look 家族有三兄弟，<b>差別全在後面那個介系詞</b>：look <b>after</b>＝照顧、look <b>for</b>＝尋找、look <b>up</b>＝查字典。課文：<i>My grandfather looked after me all the time.</i>（祖父一直照顧我）</p>
+<h4>remind ... of ...　使某人想起某事</h4>
+<p class='talk'>句型是固定的：<b>remind + 人 + of + 事</b>。介系詞只能用 of，不能用 to。課文：<i>It reminded me of my grandfather.</i>（它讓我想起我祖父）注意 remind 是「使…想起」，remember 是「自己記得」，主詞不一樣。</p>
+<h4>after all　畢竟</h4>
+<p class='talk'>用來<b>補一個理由</b>，通常放在句子開頭或句尾。課文：<i>After all, I have so many happy memories with him.</i>（畢竟我有好多跟他的快樂回憶）</p>
+<h4>a few　一些（＋可數名詞複數）</h4>
+<p class='talk'><b>a few</b> 後面接可數名詞複數（a few years）；<b>a little</b> 後面接不可數。課文：<i>A few years ago, my parents were very busy.</i></p>
+<h4>dress up　裝扮</h4>
+<p class='talk'>亡靈節那一段用的：<i>People paint their faces and dress up in costumes.</i>（人們彩繪臉、裝扮成各種造型）dress up in ＋ 服裝。</p>
+            <button class="donebtn" data-uid="L1-片語">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c3" data-uid="L1-文法" >
+          <summary><span class="ic">③</span>
+            <span class="ut">文法<small>課本 p.11–14　Grammar A／B／C</small></span>
+            <span class="chk" data-done="L1-文法"></span></summary>
+          <div class="ubody">
+            <p class='talk'>這是整課的<b>心臟</b>。課名 <b>We Visited Our Relatives Yesterday</b> 本身就是一個過去式句子，課本用三頁教你把它拆開來用。等一下的小考和段考，考的幾乎都是這三頁。</p>
+<h4>A. be 動詞過去式：was／were</h4>
+<div class='tw'><table><thead><tr><th>主詞</th><th>現在</th><th>過去</th></tr></thead><tbody>
+<tr><td>I / He / She / It</td><td>am / is</td><td><b>was</b></td></tr>
+<tr><td>You / We / They</td><td>are</td><td><b>were</b></td></tr>
+</tbody></table></div>
+<p class='talk'>否定就在後面加 not（wasn't／weren't），疑問就把 was／were 提到句首。課文：<i>My parents <b>were</b> very busy.</i>／<i>That <b>was</b> nice.</i><br>習作最愛考的陷阱：<b>There was／were</b>——後面接單數用 was、接複數用 were。例：<i>There <b>weren't</b> any students at school a week ago.</i></p>
+<h4>B. 一般動詞過去式：規則變化</h4>
+<div class='tw'><table><thead><tr><th>規則</th><th>怎麼變</th><th>例子</th></tr></thead><tbody>
+<tr><td>一般</td><td>加 -ed</td><td>watch → watched</td></tr>
+<tr><td>字尾 e</td><td>加 -d</td><td>share → shared</td></tr>
+<tr><td>短母音＋子音</td><td>重複字尾再加 -ed</td><td>jog → jogged、plan → planned</td></tr>
+<tr><td>子音＋y</td><td>去 y 加 -ied</td><td>study → studied、cry → cried</td></tr>
+</tbody></table></div>
+<p class='talk'>課本還教了<b>字尾發音</b>三種：[d]（cleaned、enjoyed）、[t]（cooked、washed）、[ɪd]（visited、needed）。發音會考在聽力，筆試比較少直接考。</p>
+<h4>B. 一般動詞過去式：疑問句與否定句</h4>
+<p class='talk'>只要出現 <b>did</b>，後面的動詞就<b>一律變回原形</b>——這是最多人錯的地方。<span class='eg'>肯定：She <b>studied</b> English yesterday.</span><span class='eg'>否定：She <b>didn't study</b> English yesterday.（不是 didn't studied）</span><span class='eg'>疑問：<b>Did</b> she <b>study</b> English yesterday? — Yes, she <b>did</b>. / No, she <b>didn't</b>.</span>習作 Part 5 第 3 題就是：<i>Did Daniel look after his brother? — Yes, he <b>did</b>.</i>（用 did 問就用 did 答，不要跑去用 was）</p>
+<h4>C. What did you do …?　問「做了什麼」</h4>
+<p class='talk'>疑問詞 ＋ did ＋ 主詞 ＋ 原形動詞。<span class='eg'>What <b>did</b> you <b>do</b> yesterday? — I studied English.</span><span class='eg'>How <b>did</b> you <b>go</b> to the restaurant last Friday? — I walked there.</span>習作 Part 4 要你把「Emma watched the movie two hours ago.」的畫線部分造成問句，答案是 <b>What did Emma do two hours ago?</b>——注意 watched 要變回 do。</p>
+            <button class="donebtn" data-uid="L1-文法">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c4" data-uid="L1-課文句型" >
+          <summary><span class="ic">④</span>
+            <span class="ut">課文句型<small>課本 p.3–5、p.7、p.10</small></span>
+            <span class="chk" data-done="L1-課文句型"></span></summary>
+          <div class="ubody">
+            <p class='talk'>這些句子直接抄自課文。段考的「句型轉換」「重組」幾乎都從這裡出。</p>
+<h4>① I often ___ with my ___.（Get Ready）</h4>
+<p class='talk'>分享日常：<i>I often play games with my grandpa.</i></p>
+<h4>② It reminded me of ___.（Dialogue）</h4>
+<p class='talk'><i>It's a movie about death, and it reminded me of my grandfather.</i></p>
+<h4>③ Did you …? — Yes, we did.（Oral Practice）</h4>
+<p class='talk'><i>Did you have fun? — Yes, we did. We were very happy.</i><br>注意後半句用 <b>were</b>，因為在講當時的心情。</p>
+<h4>④ We ___ together, and then …（Dialogue）</h4>
+<p class='talk'><i>We cooked breakfast together, and then he walked me to school.</i><br>together 是副詞，放<b>句尾</b>，不要放中間。</p>
+<h4>⑤ … in a lively way（Reading）</h4>
+<p class='talk'><i>They remember their dead relatives in a lively way.</i><br><b>in a ... way</b>＝用某種方式，way 前面要有 a。</p>
+<h4>⑥ … is all about ___, not ___.（Reading）</h4>
+<p class='talk'><i>For Mexicans, the Day of the Dead is all about love, not fear.</i><br>這是課文最後一句，也是全文主旨——閱讀測驗問「主旨」時，答案通常就藏在這種句子裡。</p>
+            <button class="donebtn" data-uid="L1-課文句型">這一段我學完了 ✓</button>
+          </div>
+        </details>
+      </div>
+
+      <div class="lesson-pane tone-L2" data-lesson="L2" hidden>
+        <div class="lhead"><b>Lesson 2　I Read a Special Book Last Week</b><span>課本 p.17–32　主題：童婚（Child Marriage）</span></div>
+        
+        <details class="unit c1" data-uid="L2-單字" open>
+          <summary><span class="ic">①</span>
+            <span class="ut">單字<small>課本 p.20、p.22、p.24</small></span>
+            <span class="chk" data-done="L2-單字"></span></summary>
+          <div class="ubody">
+            <p class='talk'>第二課的單字比第一課難，因為它在講一個<b>沉重的社會議題</b>：童婚。一樣分堆記，但這一課多了一件事要注意——<b>不規則動詞特別多</b>。</p>
+<h4>第一堆：學校與生活（比較好背）</h4>
+<div class='tw'><table><thead><tr><th>單字</th><th>詞性</th><th>中文</th></tr></thead><tbody>
+<tr><td>math</td><td>n.</td><td>數學</td></tr>
+<tr><td>test</td><td>n.</td><td>考試</td></tr>
+<tr><td>guess</td><td>v.</td><td>猜</td></tr>
+<tr><td>computer</td><td>n.</td><td>電腦</td></tr>
+<tr><td>shoe(s)</td><td>n.</td><td>鞋子</td></tr>
+<tr><td>pair</td><td>n.</td><td>一雙</td></tr>
+<tr><td>chocolate</td><td>n.</td><td>巧克力</td></tr>
+<tr><td>arm</td><td>n.</td><td>手臂</td></tr>
+<tr><td>well</td><td>int.</td><td>嗯；那麼（發語詞）</td></tr>
+</tbody></table></div>
+<h4>第二堆：故事裡的關鍵字</h4>
+<div class='tw'><table><thead><tr><th>單字</th><th>中文</th><th>過去式</th></tr></thead><tbody>
+<tr><td>sell</td><td>賣</td><td>sold</td></tr>
+<tr><td>happen</td><td>發生</td><td>happened</td></tr>
+<tr><td>hit</td><td>打</td><td>hit（不變）</td></tr>
+<tr><td>choose</td><td>選擇</td><td>chose</td></tr>
+<tr><td>become</td><td>成為</td><td>became</td></tr>
+<tr><td>cry</td><td>哭泣</td><td>cried</td></tr>
+<tr><td>break</td><td>折斷；破裂</td><td>broke</td></tr>
+<tr><td>buy</td><td>購買</td><td>bought</td></tr>
+<tr><td>finish</td><td>完成</td><td>finished</td></tr>
+</tbody></table></div>
+<p class='talk'>看到沒有？<b>這一堆幾乎全是不規則動詞</b>。hit 的過去式還是 hit、read 的過去式還是 read（但發音要變）——習作 Part 3 專門考這個，考試也很愛考。</p>
+<h4>第三堆：形容詞與抽象名詞</h4>
+<div class='tw'><table><thead><tr><th>單字</th><th>詞性</th><th>中文</th></tr></thead><tbody>
+<tr><td>poor</td><td>adj.</td><td>貧窮的；可憐的</td></tr>
+<tr><td>terrible</td><td>adj.</td><td>糟糕的</td></tr>
+<tr><td>curious</td><td>adj.</td><td>好奇的</td></tr>
+<tr><td>scared</td><td>adj.</td><td>害怕的</td></tr>
+<tr><td>ever</td><td>adv.</td><td>曾經</td></tr>
+<tr><td>without</td><td>prep.</td><td>沒有</td></tr>
+<tr><td>nobody</td><td>pron.</td><td>沒有人</td></tr>
+<tr><td>age</td><td>n.</td><td>年齡</td></tr>
+<tr><td>marriage</td><td>n.</td><td>婚姻</td></tr>
+<tr><td>ending</td><td>n.</td><td>結局</td></tr>
+<tr><td>baby</td><td>n.</td><td>嬰兒</td></tr>
+<tr><td>children</td><td>n.</td><td>小孩（child 的複數）</td></tr>
+</tbody></table></div>
+<p class='talk'><b>nobody</b> 要特別注意：它<b>本身就是否定</b>，後面的動詞用單數，而且不需要再加 not。習作：<i>Nobody finished their homework, so the teacher was very angry.</i></p>
+            <button class="donebtn" data-uid="L2-單字">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c2" data-uid="L2-片語" >
+          <summary><span class="ic">②</span>
+            <span class="ut">片語<small>課本 p.20、p.24</small></span>
+            <span class="chk" data-done="L2-片語"></span></summary>
+          <div class="ubody">
+            <h4>get married　結婚</h4>
+<p class='talk'>married 是形容詞，所以用 <b>get</b>（變成）或 <b>be</b>（狀態）。過去式 <b>got married</b>。<span class='eg'>Tanya got married to a man at eleven.</span>「和某人結婚」用 <b>get married <u>to</u> 某人</b>，不是 with。</p>
+<h4>not ... anymore　不再</h4>
+<p class='talk'>用在否定句，anymore 放<b>句尾</b>。<span class='eg'>He doesn't live there anymore.（他不再住那裡了）</span></p>
+<h4>take action　採取行動</h4>
+<p class='talk'>過去式 took action。課文最後一句就是它：<span class='eg'>Children like Geeta and Tanya need our help. Let's take action now!</span></p>
+<h4>stand　忍受（這裡不是「站」）</h4>
+<p class='talk'>課文：<i>She couldn't stand it, so she ran away.</i>（她受不了，所以逃走了）<b>一字多義</b>是會考很愛考的，看到 stand 別直接翻成站。</p>
+            <button class="donebtn" data-uid="L2-片語">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c3" data-uid="L2-文法" >
+          <summary><span class="ic">③</span>
+            <span class="ut">文法<small>課本 p.27–30　Grammar A／B</small></span>
+            <span class="chk" data-done="L2-文法"></span></summary>
+          <div class="ubody">
+            <p class='talk'>第二課的文法是<b>「講原因」</b>。第一課學會了講「以前做了什麼」，第二課要學會講「為什麼」。</p>
+<h4>A. Why …? — Because …</h4>
+<p class='talk'>問原因用 <b>Why</b>，回答用 <b>Because</b>。<span class='eg'>Why did Sally run to school this morning?</span><span class='eg'>Because she was late for school.</span>注意問句裡有 did，所以動詞要用<b>原形</b> run。</p>
+<h4>B. because 與 so：同一件事的兩種寫法</h4>
+<div class='tw'><table><thead><tr><th>連接詞</th><th>後面接</th><th>位置</th></tr></thead><tbody>
+<tr><td>because</td><td>原因</td><td>可放句中或句首</td></tr>
+<tr><td>so</td><td>結果</td><td>只能放句中</td></tr>
+</tbody></table></div>
+<p class='talk'>同一件事可以這樣互換：<span class='eg'>Amy was very happy <b>because</b> she won the game.</span><span class='eg'><b>Because</b> Amy won the game, she was very happy.</span><span class='eg'>Amy won the game, <b>so</b> she was very happy.</span></p>
+<h4>🔴 最常錯的地方</h4>
+<p class='talk'>中文說「<b>因為</b>下大雨，<b>所以</b>我們待在家」，兩個都有；但英文<b>只能留一個</b>。<span class='eg'>✗ <s>Because it rained, so we stayed home.</s></span><span class='eg'>✓ Because it rained, we stayed home.</span><span class='eg'>✓ It rained, so we stayed home.</span>習作 Part 4 五題全在練這個，段考也一定考。</p>
+            <button class="donebtn" data-uid="L2-文法">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c4" data-uid="L2-課文句型" >
+          <summary><span class="ic">④</span>
+            <span class="ut">課文句型<small>課本 p.19–20、p.23</small></span>
+            <span class="chk" data-done="L2-課文句型"></span></summary>
+          <div class="ubody">
+            <h4>① What happened to ___?　…怎麼了？</h4>
+<p class='talk'><i>What happened next?</i>（後來怎麼了？）習作：<i>What happened to Judy? Why is she crying?</i></p>
+<h4>② I'm curious about ___.　我對…很好奇</h4>
+<p class='talk'><i>I'm really curious about the ending of this story.</i><br>介系詞用 <b>about</b>。</p>
+<h4>③ ___ got married to ___ at ___.　在幾歲時和誰結婚</h4>
+<p class='talk'><i>A ten-year-old girl from Niger, Geeta, got married to a thirty-year-old man.</i><br>注意 <b>ten-year-old</b> 中間有連字號時，year <b>不加 s</b>。</p>
+<h4>④ … could not …　（過去）不能…</h4>
+<p class='talk'><i>She could not go to school because her baby needed her.</i><br>can 的過去式是 <b>could</b>，這一課的不規則動詞表裡有。</p>
+<h4>⑤ … was like a nightmare.　像一場惡夢</h4>
+<p class='talk'><i>The marriage was like a nightmare.</i><br>課本用這句教你 <b>Using Context Clues</b>（用上下文猜字義）——不認識 nightmare 沒關係，前面講丈夫打她、她很害怕睡不著，就能猜出是「糟糕的經驗」。<b>這個技巧在會考閱讀測驗非常好用。</b></p>
+            <button class="donebtn" data-uid="L2-課文句型">這一段我學完了 ✓</button>
+          </div>
+        </details>
+      </div>
+
+      <div class="lesson-pane tone-R1" data-lesson="R1" hidden>
+        <div class="lhead"><b>Review 1　複習與段考補充</b><span>課本 p.33–36　＋ 段考才會出現的補充考點</span></div>
+        
+        <details class="unit c1" data-uid="R1-單字" open>
+          <summary><span class="ic">①</span>
+            <span class="ut">單字<small>課本 p.33 Build Your Vocabulary</small></span>
+            <span class="chk" data-done="R1-單字"></span></summary>
+          <div class="ubody">
+            <p class='talk'>Review 1 的單字不是新的，是把 L1、L2 最重要的挑出來再考一次。課本用一張「人生歷程圖」串起來——這正是段考最愛的出題方式：<b>把單字放進情境句</b>，不是單獨問你中文。</p>
+<h4>課本挑出的五個字（Look and Fill In）</h4>
+<div class='tw'><table><thead><tr><th>圖</th><th>答案</th><th>出處</th></tr></thead><tbody>
+<tr><td>讀書</td><td>study</td><td>L1</td></tr>
+<tr><td>分享</td><td>share</td><td>L1</td></tr>
+<tr><td>貼心的</td><td>sweet</td><td>L1</td></tr>
+<tr><td>結婚</td><td>get married</td><td>L2</td></tr>
+<tr><td>過世</td><td>pass away</td><td>L1</td></tr>
+</tbody></table></div>
+<p class='talk'>課文段落也是同一組字：<i>People study at school, make friends, and share everything… People fall in love with someone, get married… People finally pass away.</i></p>
+<h4>Read and Fill In 用到的不規則動詞</h4>
+<p class='talk'>課本 p.34 的 Dear Diary 短文要你填：<span class='eg'>get → <b>get</b>　come → <b>came</b>　hit → <b>hit</b>　break → <b>broke</b>　cry → <b>cried</b></span>這五個字全部出現在 L2 的不規則動詞表——<b>Review 就是在驗收你有沒有真的背起來</b>。</p>
+            <button class="donebtn" data-uid="R1-單字">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c2" data-uid="R1-文法" >
+          <summary><span class="ic">②</span>
+            <span class="ut">文法<small>課本 p.33–34 Grow Your Grammar</small></span>
+            <span class="chk" data-done="R1-文法"></span></summary>
+          <div class="ubody">
+            <p class='talk'>Review 1 把兩課的文法收成兩張表。段考的文法題幾乎都從這兩張表出。</p>
+<h4>I. 現在式與過去式（課本原表）</h4>
+<div class='tw'><table><thead><tr><th></th><th>現在式</th><th>過去式</th></tr></thead><tbody>
+<tr><td>be 動詞</td><td>am, is</td><td><b>was</b></td></tr>
+<tr><td></td><td>are</td><td><b>were</b></td></tr>
+<tr><td>動詞規則變化</td><td>share／jog／study</td><td>shared／jogged／studied</td></tr>
+<tr><td>動詞不規則變化</td><td>sell／buy／break</td><td>sold／bought／broke</td></tr>
+</tbody></table></div>
+<p class='talk'>課本特別標出<b>常用過去式的時間副詞：yesterday ／ …ago ／ last…</b>——這三個就是段考與會考的判斷線索，看到它們就用過去式。</p>
+<h4>II. because 與 so 的用法（課本原表）</h4>
+<div class='tw'><table><thead><tr><th>結構</th><th>例句</th></tr></thead><tbody>
+<tr><td>because ＋ 原因</td><td>I can't play computer games now <b>because</b> I have a lot of homework.</td></tr>
+<tr><td>so ＋ 結果</td><td>＝ I have a lot of homework, <b>so</b> I can't play computer games now.</td></tr>
+</tbody></table></div>
+<p class='talk'>課本直接用「＝」把兩句連起來，意思是<b>段考會考句型轉換</b>：給你 because 的句子，要你改寫成 so。</p>
+            <button class="donebtn" data-uid="R1-文法">這一段我學完了 ✓</button>
+          </div>
+        </details>
+        <details class="unit c3" data-uid="R1-段考補充" >
+          <summary><span class="ic">③</span>
+            <span class="ut">段考補充<small>課本正課沒教，但段考考了</small></span>
+            <span class="chk" data-done="R1-段考補充"></span></summary>
+          <div class="ubody">
+            <p class='talk'>以下是實際段考卷考過、但翻遍 L1／L2／Review 1 正課都找不到的考點。它們多半是七年級學過的東西，段考拿來一起驗收。</p>
+<h4>🔴 不定代名詞 ＋ 形容詞：形容詞要放後面</h4>
+<p class='talk'>113 學年第一次段考第 20 題：<span class='eg'>You looked sick. Did you eat ______ for lunch today?<br>(A) bad thing　(B) bad something　(C) any bad　<b>(D) anything bad ✓</b></span>中文說「壞<u>東西</u>」會把形容詞放前面，英文遇到 <b>something／anything／nothing／everything</b> 時<b>相反</b>：<span class='eg'>something <b>new</b>（新的東西）　anything <b>bad</b>（不好的東西）　nothing <b>special</b>（沒什麼特別的）</span>而且疑問句與否定句用 <b>anything</b>，肯定句用 <b>something</b>。</p>
+<h4>動詞的第三人稱單數變化</h4>
+<p class='talk'>同一份段考第 17 題考 <i>He ______ to America three times a year.</i>答案是 <b>flies</b>（不是過去式 flew）。<b>句子裡沒有過去的時間線索時，不要看到動詞就寫過去式</b>——three times a year 是習慣，用現在式。fly 是子音＋y，去 y 加 -ies。</p>
+<h4>圖表閱讀（課本 p.35 Power Up Your Reading）</h4>
+<p class='talk'>課本用一張「各國女性平均結婚年齡」世界地圖，要你從地圖＋對話推論 Karen 來自哪個國家。<b>這正是會考「在圖表中找出所需的資訊」那一類（佔 5.6%）</b>，作法是：先看圖例（顏色對應的數字範圍）→ 再回對話找關鍵句（<i>women often get married in their late 20s</i>）→ 對回地圖。</p>
+            <button class="donebtn" data-uid="R1-段考補充">這一段我學完了 ✓</button>
+          </div>
+        </details>
+      </div>
+  </section>
+
+  <section id="ex" class="hide">
+    <div class="gate">課本內容讀完了，接下來看這些內容<b>在會考裡實際佔多少份量</b>。最後一個單元會做總結。</div>
+    
+      <details class="unit c1 " data-uid="tense">
+        <summary><span class="ic">⏰</span><span class="ut">四種時態怎麼選（會考真正考的技術）</span>
+          <span class="chk" data-done="tense"></span></summary>
+        <div class="ubody">
+          <p class="lead">會考的時態題長這樣：一句話挖一個空，四個選項是同一個動詞的四種形式。判斷方法只有一個——先找時間線索。</p>
+          <h4>步驟一：先找時間線索，再看動詞</h4>
+<div class='tw'><table><thead><tr><th>看到這種線索</th><th>就選這個時態</th><th>長什麼樣</th></tr></thead><tbody>
+<tr><td>yesterday、last night、two years ago</td><td>過去簡單式</td><td>watched／studied／went</td></tr>
+<tr><td>when＋過去句、at that time</td><td>過去進行式</td><td>was／were watching</td></tr>
+<tr><td>for＋一段時間、since、ever、already、twice</td><td>現在完成式</td><td>have／has watched</td></tr>
+<tr><td>now、Look!、at the moment</td><td>現在進行式</td><td>am／is／are watching</td></tr>
+</tbody></table></div>
+<h4>步驟二：三組最常混在一起的</h4>
+<p><b>① 過去簡單 vs 現在完成</b>：有明確過去時間點 → 過去簡單；只講「到現在為止」→ 現在完成。</p>
+<p><span class='eg'>Amy <u>finished</u> her homework <b>last night</b>.</span></p>
+<p><span class='eg'>Amy <u>has finished</u> her homework <b>already</b>.</span></p>
+<p><b>② 過去簡單 vs 過去進行</b>：一個動作打斷另一個，被打斷的用過去進行。</p>
+<p><span class='eg'>I <u>was washing</u> the dishes <b>when</b> Mom came home.</span></p>
+<p><b>③ 過去 vs 現在</b>：後面提到現在的結果，前面常是過去。</p>
+<p><span class='eg'>My brother <u>broke</u> his arm last week, <b>so he can't play now</b>.</span></p>
+          <button class="donebtn" data-uid="tense">這一段我讀完了 ✓</button>
+        </div>
+      </details>
+
+      <details class="unit c2 " data-uid="conj">
+        <summary><span class="ic">🔗</span><span class="ut">why / because / so 在會考的實際份量</span>
+          <span class="chk" data-done="conj"></span></summary>
+        <div class="ubody">
+          <p class="lead">誠實說：這個文法點在 111–115 年的會考文法單題裡，一次都沒單獨出現過。</p>
+          <h4>那為什麼還要練？</h4>
+<p>因為它大量出現在<b>閱讀題組與克漏字</b>裡——而閱讀題組佔會考 41%。看不懂 because／so 接的是原因還是結果，整段文意就跑掉。</p>
+<p>而且<b>段考一定考</b>句型轉換（把 because 的句子改寫成 so 的句子）。</p>
+<p>所以結論是：<b>段考為它多花時間，會考不必為它多花時間。</b></p>
+          <button class="donebtn" data-uid="conj">這一段我讀完了 ✓</button>
+        </div>
+      </details>
+
+      <details class="unit c3 " data-uid="vocab">
+        <summary><span class="ic">📚</span><span class="ut">單字要怎麼背：拿分字 vs 讀課文字</span>
+          <span class="chk" data-done="vocab"></span></summary>
+        <div class="ubody">
+          <p class="lead">把這兩課的 89 個單字片語拿去比對 501 題會考題，結果會改變你背單字的方式。</p>
+          <h4>數據</h4>
+<p>只有 <b>11 個</b>課本字曾出現在官方字彙單題的選項裡：why、because、give、have、was、share、remember、computer、music、arm、ghost。</p>
+<p>有 <b>14 個</b>課本字在 501 題裡<b>從來沒出現過</b>：pass away、remind…of、memory、look after、dress up、tomb、sweep、lively、touching、not…anymore、curious、ending、marriage、fear。</p>
+<h4>🔴 但這不代表那 14 個字不用背</h4>
+<p>那 14 個字幾乎都是<b>課文主題專屬詞</b>。它們是<b>讀懂課文用的</b>，而閱讀題組佔會考 41%。</p>
+<p><b>兩種都要背，但心裡要清楚用途不同。</b></p>
+          <button class="donebtn" data-uid="vocab">這一段我讀完了 ✓</button>
+        </div>
+      </details>
+
+      <details class="unit c4 final" data-uid="where">
+        <summary><span class="ic">🎯</span><span class="ut">最後：這一課該把力氣花在哪</span>
+          <span class="chk" data-done="where"></span></summary>
+        <div class="ubody">
+          <p class="lead">前面都講完了，現在用官方數據做總結——並附上會考真的考過的題目長相。</p>
+          <h4>官方數據（111–115，閱讀 215 題）</h4>
+<div class='tw'><table><thead><tr><th>考點</th><th>佔比</th><th>平均通過率</th></tr></thead><tbody>
+<tr><td>字彙／片語（單題）</td><td>26.5%</td><td>0.645</td></tr>
+<tr><td>文法（單題）</td><td>18.6%</td><td><b>0.559</b></td></tr>
+<tr><td>閱讀理解（題組）</td><td>40.9%</td><td>—</td></tr>
+<tr><td>克漏字</td><td>9.3%</td><td>0.561</td></tr>
+</tbody></table></div>
+<p><b>單題（字彙＋文法）合起來 45%</b>——正好就是你小考在考的東西。小考不是額外的功課，它直接對應會考近一半的題目。</p>
+<p>但注意：<b>文法單題通過率 0.559，比多數閱讀理解題還低</b>。大家以為閱讀最難，其實失分最多的是文法單題。</p>
+<h4>這兩課直接命中的部分</h4>
+<div class='tw'><table><thead><tr><th>課本文法點</th><th>命中官方文法單題</th><th>平均通過率</th></tr></thead><tbody>
+<tr><td>L1 一般動詞過去式＋did 問句</td><td><b>6 題（佔 15%）</b></td><td>0.543</td></tr>
+<tr><td>L1 be 動詞過去式 was／were</td><td>0 題</td><td>—</td></tr>
+<tr><td>L1 What did …?</td><td>0 題</td><td>—</td></tr>
+<tr><td>L2 why…because、because／so</td><td>0 題</td><td>—</td></tr>
+</tbody></table></div>
+<p><b>每 7 題文法單題就有 1 題在考「過去式和其他時態怎麼分」</b>，通過率比整體還低——這就是投報率最高的地方。</p>
+<h4>會考實際考過的長相（只列選項，不轉載題目）</h4>
+<p><span class='eg'>115-17　mopped ／ mops ／ is mopping ／ has mopped</span></p>
+<p><span class='eg'>112-6　jogged ／ was jogging ／ has jogged ／ would jog</span></p>
+<p><span class='eg'>112-20　practiced ／ have practiced ／ am practicing ／ would practice</span></p>
+<p><span class='eg'>111-19　studied ／ studies ／ has studied ／ was going to study</span></p>
+<p><span class='eg'>113-21　I did ／ I would do ／ I was doing ／ I'll do</span></p>
+<p><b>四個選項永遠是同一個動詞。</b>認出這種題型，就直接去句子裡找時間線索。</p>
+<h4>一句話總結</h4>
+<p>課本 p.12–13（一般動詞過去式與 did 問句）<b>是這兩課唯一直接命中會考的地方</b>，而且是失分區。其他內容不是不重要，是「先確保這一塊拿到」再說。</p>
+          <button class="donebtn" data-uid="where">這一段我讀完了 ✓</button>
+        </div>
+      </details>
+  </section>
+
+  <section id="wd" class="hide">
+    <div class="gate">課本 89 個單字片語，四種練法自由選。例句全部取自課本原文，並標出處頁。
+      <b>發音與辨識用瀏覽器內建語音</b>，建議用 Chrome；口說練習需要允許麥克風。</div>
+    <div class="wsel">
+      <label>範圍</label>
+      <select id="wscope"><option value="all">全部（89）</option><option value="L1">Lesson 1</option><option value="L2">Lesson 2</option></select>
+    </div>
+    <div class="modes" id="modes"></div>
+    <div class="media">
+      <b>📺 課本 QR code 的官方影音</b>
+      <p>下面這些是掃課本頁面上的 QR code 得到的南一官方連結，點了會開新分頁。</p>
+      <a class="mlink" href="http://video.nani.com.tw/B3L1-info" target="_blank" rel="noopener">
+        🎬 Lesson 1 課文動畫（課本 p.4 的 QR）</a>
+      <a class="mlink" href="http://video.nani.com.tw/B3L2-info" target="_blank" rel="noopener">
+        🎬 Lesson 2 課文動畫（同系列官方影片）</a>
+      <a class="mlink" href="http://video.nani.com.tw/p15-1" target="_blank" rel="noopener">
+        🔊 p.15 Pronunciation 音檔①（音節）</a>
+      <a class="mlink" href="http://video.nani.com.tw/p15-2" target="_blank" rel="noopener">
+        🔊 p.15 Pronunciation 音檔②（重音）</a>
+      <p class="mnote">上面四個是課本 QR 能直接開的官方資源。<b>課文與單字的整段朗讀在南一電子書裡，需要帳號</b>，
+        所以本頁的單字發音、聽力與口說一律使用瀏覽器內建語音。</p>
+    </div>
+    <div id="wrun" class="hide"></div>
+  </section>
+
+  <section id="qz" class="hide">
+    <div class="gate" id="gate"></div>
+    <div class="stages" id="stages"></div>
+    <div id="runner" class="hide"></div>
+  </section>
+</div>
+<footer>
+  小考題目取自南一版習作（Lesson 1／2 各 Part）並做延伸，供個人複習使用。<br>
+  會考部分僅引用官方題號與選項組合，未轉載試題內容。
+</footer>
+
+<script>
+const DATA = {"vocab": [{"word": "yesterday", "meaning": "昨天", "pos": "adv.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "What did you do yesterday, Rita?", "exz": "Rita，你昨天做了什麼？", "exs": "L1 Dialogue p.3", "pool": ["study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "study", "meaning": "研讀", "pos": "v.", "lesson": "L1", "section": "Dialogue", "past": "studied", "ex": "I studied English in the morning and jogged after lunch.", "exz": "我早上讀英文，午餐後去慢跑。", "exs": "L1 Dialogue p.3", "pool": ["yesterday", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "jog", "meaning": "慢跑", "pos": "v.", "lesson": "L1", "section": "Dialogue", "past": "jogged", "ex": "I studied English in the morning and jogged after lunch.", "exz": "我早上讀英文，午餐後去慢跑。", "exs": "L1 Dialogue p.3", "pool": ["yesterday", "study", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "watch", "meaning": "觀看", "pos": "v.", "lesson": "L1", "section": "Dialogue", "past": "watched", "ex": "I watched the movie Coco last night.", "exz": "我昨晚看了電影《可可夜總會》。", "exs": "L1 Dialogue p.3", "pool": ["yesterday", "study", "jog", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "last", "meaning": "前一個的", "pos": "adj.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "I watched the movie Coco last night.", "exz": "我昨晚看了電影《可可夜總會》。", "exs": "L1 Dialogue p.3", "pool": ["yesterday", "study", "jog", "watch", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "death", "meaning": "死亡", "pos": "n.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "It's a movie about death, and it reminded me of my grandfather.", "exz": "那是一部關於死亡的電影，它讓我想起我的祖父。", "exs": "L1 Dialogue p.3", "pool": ["yesterday", "study", "jog", "watch", "last", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "a few", "meaning": "一些", "pos": "adj.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "A few years ago, my parents were very busy.", "exz": "幾年前，我父母非常忙。", "exs": "L1 Dialogue p.4", "pool": ["pass away", "remind ... of", "look after", "after all", "dress up"]}, {"word": "ago", "meaning": "以前", "pos": "adv.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "A few years ago, my parents were very busy.", "exz": "幾年前，我父母非常忙。", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "parents", "meaning": "父母親", "pos": "n.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "A few years ago, my parents were very busy.", "exz": "幾年前，我父母非常忙。", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "were", "meaning": "是（are 的過去式）", "pos": "v.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "A few years ago, my parents were very busy.", "exz": "幾年前，我父母非常忙。", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "was", "meaning": "是（am/is 的過去式）", "pos": "v.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "That was nice. You must really love him.", "exz": "那真好，你一定很愛他。", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "must", "meaning": "一定；必須", "pos": "aux.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "That was nice. You must really love him.", "exz": "那真好，你一定很愛他。", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "pass away", "meaning": "過世", "pos": "phr.", "lesson": "L1", "section": "Dialogue", "past": "passed away", "ex": "But he passed away last year. I was very sad then.", "exz": "但他去年過世了，我當時非常難過。", "exs": "L1 Dialogue p.4", "pool": ["a few", "remind ... of", "look after", "after all", "dress up"]}, {"word": "together", "meaning": "一起", "pos": "adv.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "We cooked breakfast together, and then he walked me to school.", "exz": "我們一起做早餐，然後他陪我走去學校。", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "sweet", "meaning": "貼心的；甜的", "pos": "adj.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "That was so sweet!", "exz": "那真是太貼心了！", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "remind ... of", "meaning": "想起", "pos": "phr.", "lesson": "L1", "section": "Dialogue", "past": "reminded", "ex": "It's a movie about death, and it reminded me of my grandfather.", "exz": "那是一部關於死亡的電影，它讓我想起我的祖父。", "exs": "L1 Dialogue p.3", "pool": ["a few", "pass away", "look after", "after all", "dress up"]}, {"word": "memory", "meaning": "回憶；記憶", "pos": "n.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "After all, I have so many happy memories with him.", "exz": "畢竟，我有好多和他一起的快樂回憶。", "exs": "L1 Dialogue p.4", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "look after", "meaning": "照顧", "pos": "phr.", "lesson": "L1", "section": "Dialogue", "past": "looked after", "ex": "My grandfather looked after me all the time.", "exz": "我的祖父一直照顧我。", "exs": "L1 Dialogue p.4", "pool": ["a few", "pass away", "remind ... of", "after all", "dress up"]}, {"word": "after all", "meaning": "畢竟", "pos": "phr.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "After all, I have so many happy memories with him.", "exz": "畢竟，我有好多和他一起的快樂回憶。", "exs": "L1 Dialogue p.4", "pool": ["a few", "pass away", "remind ... of", "look after", "dress up"]}, {"word": "grandparents", "meaning": "祖父母", "pos": "n.", "lesson": "L1", "section": "Dialogue", "past": "", "ex": "How do you show your love to your grandparents?", "exz": "你如何向祖父母表達你的愛？", "exs": "L1 Warm-up p.3", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "dress up", "meaning": "裝扮", "pos": "phr.", "lesson": "L1", "section": "Word Power", "past": "dressed up", "ex": "People paint their faces and dress up in costumes.", "exz": "人們彩繪臉部並裝扮成各種造型。", "exs": "L1 Word Power p.6", "pool": ["a few", "pass away", "remind ... of", "look after", "after all"]}, {"word": "music", "meaning": "音樂", "pos": "n.", "lesson": "L1", "section": "Word Power", "past": "", "ex": "People dance to music in a circle.", "exz": "人們圍成圓圈隨音樂跳舞。", "exs": "L1 Word Power p.6", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "circle", "meaning": "圓圈", "pos": "n.", "lesson": "L1", "section": "Word Power", "past": "", "ex": "People dance to music in a circle.", "exz": "人們圍成圓圈隨音樂跳舞。", "exs": "L1 Word Power p.6", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "plant", "meaning": "種植", "pos": "v.", "lesson": "L1", "section": "Word Power", "past": "planted", "ex": "People plant flowers and paint eggs.", "exz": "人們種花並彩繪雞蛋。", "exs": "L1 Word Power p.6", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "flower", "meaning": "花", "pos": "n.", "lesson": "L1", "section": "Word Power", "past": "", "ex": "People plant flowers and paint eggs.", "exz": "人們種花並彩繪雞蛋。", "exs": "L1 Word Power p.6", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "candle", "meaning": "蠟燭", "pos": "n.", "lesson": "L1", "section": "Word Power", "past": "", "ex": "People place candles and flowers around the tomb.", "exz": "人們在墳墓周圍放置蠟燭和花。", "exs": "L1 Word Power p.6", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "tomb", "meaning": "墳墓", "pos": "n.", "lesson": "L1", "section": "Word Power", "past": "", "ex": "People place candles and flowers around the tomb.", "exz": "人們在墳墓周圍放置蠟燭和花。", "exs": "L1 Word Power p.6", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "place", "meaning": "放置", "pos": "v.", "lesson": "L1", "section": "Word Power", "past": "placed", "ex": "People place candles and flowers around the tomb.", "exz": "人們在墳墓周圍放置蠟燭和花。", "exs": "L1 Word Power p.6", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "remember", "meaning": "記得", "pos": "v.", "lesson": "L1", "section": "Reading", "past": "remembered", "ex": "They remember their dead relatives in a lively way.", "exz": "他們用充滿活力的方式紀念過世的親人。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "dead", "meaning": "死亡的", "pos": "adj.", "lesson": "L1", "section": "Reading", "past": "", "ex": "They remember their dead relatives in a lively way.", "exz": "他們用充滿活力的方式紀念過世的親人。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "relative", "meaning": "親戚；親屬", "pos": "n.", "lesson": "L1", "section": "Reading", "past": "", "ex": "They remember their dead relatives in a lively way.", "exz": "他們用充滿活力的方式紀念過世的親人。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "ghost", "meaning": "鬼", "pos": "n.", "lesson": "L1", "section": "Reading", "past": "", "ex": "We invited the ghosts back to our world.", "exz": "我們邀請亡靈回到我們的世界。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "later", "meaning": "之後；晚點", "pos": "adv.", "lesson": "L1", "section": "Reading", "past": "", "ex": "Later, we danced at a street party. It was so fun.", "exz": "之後我們在街頭派對上跳舞，非常好玩。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "candy", "meaning": "糖果", "pos": "n.", "lesson": "L1", "section": "Reading", "past": "", "ex": "There were flowers, candles, candy, and food on the table.", "exz": "桌上有花、蠟燭、糖果和食物。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "meal", "meaning": "餐", "pos": "n.", "lesson": "L1", "section": "Reading", "past": "", "ex": "Her family cooked a big meal for everyone.", "exz": "她的家人為大家煮了一頓大餐。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "share", "meaning": "分享", "pos": "v.", "lesson": "L1", "section": "Reading", "past": "shared", "ex": "They shared touching stories of their dead relatives with me.", "exz": "他們和我分享過世親人的感人故事。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "story", "meaning": "故事", "pos": "n.", "lesson": "L1", "section": "Reading", "past": "", "ex": "They shared touching stories of their dead relatives with me.", "exz": "他們和我分享過世親人的感人故事。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "sweep", "meaning": "清掃", "pos": "v.", "lesson": "L1", "section": "Reading", "past": "swept", "ex": "During the festival, they also sweep tombs.", "exz": "節慶期間，他們也會掃墓。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "lively", "meaning": "充滿活力的", "pos": "adj.", "lesson": "L1", "section": "Reading", "past": "", "ex": "They remember their dead relatives in a lively way.", "exz": "他們用充滿活力的方式紀念過世的親人。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "touching", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "touching", "meaning": "感人的", "pos": "adj.", "lesson": "L1", "section": "Reading", "past": "", "ex": "They shared touching stories of their dead relatives with me.", "exz": "他們和我分享過世親人的感人故事。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "fear", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "fear", "meaning": "害怕", "pos": "n.", "lesson": "L1", "section": "Reading", "past": "", "ex": "For Mexicans, the Day of the Dead is all about love, not fear.", "exz": "對墨西哥人來說，亡靈節談的全是愛，而不是恐懼。", "exs": "L1 Reading p.7", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "prepare", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "prepare", "meaning": "準備", "pos": "v.", "lesson": "L1", "section": "Post-reading", "past": "prepared", "ex": "In Taiwan, people sweep tombs and prepare food offerings.", "exz": "在台灣，人們掃墓並準備供品。", "exs": "L1 Post-reading p.10", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "offering", "burn", "mainly", "true", "paragraph"]}, {"word": "offering", "meaning": "供品", "pos": "n.", "lesson": "L1", "section": "Post-reading", "past": "", "ex": "In Taiwan, people sweep tombs and prepare food offerings.", "exz": "在台灣，人們掃墓並準備供品。", "exs": "L1 Post-reading p.10", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "burn", "mainly", "true", "paragraph"]}, {"word": "burn", "meaning": "燒", "pos": "v.", "lesson": "L1", "section": "Post-reading", "past": "burned", "ex": "burn paper money", "exz": "燒紙錢", "exs": "L1 Post-reading p.9", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "mainly", "true", "paragraph"]}, {"word": "mainly", "meaning": "主要地", "pos": "adv.", "lesson": "L1", "section": "Comprehension", "past": "", "ex": "What is the reading mainly about?", "exz": "這篇閱讀主要在講什麼？", "exs": "L1 Comprehension p.9", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "true", "paragraph"]}, {"word": "true", "meaning": "真實的", "pos": "adj.", "lesson": "L1", "section": "Comprehension", "past": "", "ex": "Which is NOT true?", "exz": "哪一個敘述不正確？", "exs": "L1 Comprehension p.9", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "paragraph"]}, {"word": "paragraph", "meaning": "段落", "pos": "n.", "lesson": "L1", "section": "Comprehension", "past": "", "ex": "What does it in the first paragraph mean?", "exz": "第一段中的 it 指的是什麼？", "exs": "L1 Comprehension p.9", "pool": ["yesterday", "study", "jog", "watch", "last", "death", "ago", "parents", "were", "was", "must", "together", "sweet", "memory", "grandparents", "music", "circle", "plant", "flower", "candle", "tomb", "place", "remember", "dead", "relative", "ghost", "later", "candy", "meal", "share", "story", "sweep", "lively", "touching", "fear", "prepare", "offering", "burn", "mainly", "true"]}, {"word": "math", "meaning": "數學", "pos": "n.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "Hey Nina. Did you study for the math test?", "exz": "嘿 Nina，你有準備數學考試嗎？", "exs": "L2 Dialogue p.19", "pool": ["test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "test", "meaning": "考試；測驗", "pos": "n.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "Hey Nina. Did you study for the math test?", "exz": "嘿 Nina，你有準備數學考試嗎？", "exs": "L2 Dialogue p.19", "pool": ["math", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "guess", "meaning": "猜；猜測", "pos": "v.", "lesson": "L2", "section": "Dialogue", "past": "guessed", "ex": "No, I didn't. But guess what? I read a special book.", "exz": "沒有。但你猜怎麼著？我讀了一本特別的書。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "well", "meaning": "嗯；那麼（發語詞）", "pos": "int.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "Well, it's about a girl from Nigeria.", "exz": "嗯，這是關於一個來自奈及利亞的女孩。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "get married", "meaning": "結婚", "pos": "phr.", "lesson": "L2", "section": "Dialogue", "past": "got married", "ex": "She was only 12 years old, but she got married to a 65-year-old man.", "exz": "她才 12 歲，卻嫁給一個 65 歲的男人。", "exs": "L2 Dialogue p.19", "pool": ["a few", "pass away", "remind ... of", "look after", "after all", "dress up", "not ... anymore", "take action"]}, {"word": "why", "meaning": "為什麼", "pos": "adv.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "What! Why did she do that? She was so young!", "exz": "什麼！她為什麼那樣做？她那麼小！", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "well", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "sell", "meaning": "賣", "pos": "v.", "lesson": "L2", "section": "Dialogue", "past": "sold", "ex": "Her father sold her to the old man because her family was very poor.", "exz": "她父親因為家裡很窮，把她賣給那個老人。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "well", "why", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "because", "meaning": "因為", "pos": "conj.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "Her father sold her to the old man because her family was very poor.", "exz": "她父親因為家裡很窮，把她賣給那個老人。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "well", "why", "sell", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "poor", "meaning": "貧窮的；可憐的", "pos": "adj.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "Her father sold her to the old man because her family was very poor.", "exz": "她父親因為家裡很窮，把她賣給那個老人。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "happen", "meaning": "發生", "pos": "v.", "lesson": "L2", "section": "Dialogue", "past": "happened", "ex": "That's so sad. What happened next?", "exz": "太難過了，後來發生了什麼事？", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "hit", "meaning": "打", "pos": "v.", "lesson": "L2", "section": "Dialogue", "past": "hit", "ex": "Her husband often hit her.", "exz": "她的丈夫常常打她。", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "terrible", "meaning": "糟糕的", "pos": "adj.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "That's terrible! Did her husband ever find her?", "exz": "太糟了！她丈夫後來有找到她嗎？", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "ever", "meaning": "曾經", "pos": "adv.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "That's terrible! Did her husband ever find her?", "exz": "太糟了！她丈夫後來有找到她嗎？", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "finish", "meaning": "完成", "pos": "v.", "lesson": "L2", "section": "Dialogue", "past": "finished", "ex": "Please finish it and tell me.", "exz": "請把它看完然後告訴我。", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "not ... anymore", "meaning": "不再", "pos": "phr.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "She could not go to school anymore.", "exz": "她不能再去上學了。", "exs": "L2 Dialogue p.19", "pool": ["a few", "pass away", "remind ... of", "look after", "after all", "dress up", "get married", "take action"]}, {"word": "curious", "meaning": "好奇的", "pos": "adj.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "I'm really curious about the ending of this story.", "exz": "我真的很好奇這個故事的結局。", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "ending", "meaning": "結局", "pos": "n.", "lesson": "L2", "section": "Dialogue", "past": "", "ex": "I'm really curious about the ending of this story.", "exz": "我真的很好奇這個故事的結局。", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "stand", "meaning": "忍受", "pos": "v.", "lesson": "L2", "section": "Dialogue", "past": "stood", "ex": "She couldn't stand it, so she ran away.", "exz": "她受不了，所以逃走了。", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "shoe", "meaning": "鞋子", "pos": "n.", "lesson": "L2", "section": "Word Power", "past": "", "ex": "buy a pair of shoes", "exz": "買一雙鞋", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "buy", "meaning": "購買", "pos": "v.", "lesson": "L2", "section": "Word Power", "past": "bought", "ex": "buy a pair of shoes", "exz": "買一雙鞋", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "pair", "meaning": "一雙", "pos": "n.", "lesson": "L2", "section": "Word Power", "past": "", "ex": "buy a pair of shoes", "exz": "買一雙鞋", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "pick", "meaning": "摘採", "pos": "v.", "lesson": "L2", "section": "Word Power", "past": "picked", "ex": "pick cacao fruit", "exz": "摘採可可果實", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "chocolate", "meaning": "巧克力", "pos": "n.", "lesson": "L2", "section": "Word Power", "past": "", "ex": "eat chocolate", "exz": "吃巧克力", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "break", "meaning": "折斷；破裂", "pos": "v.", "lesson": "L2", "section": "Word Power", "past": "broke", "ex": "break his arm", "exz": "弄斷他的手臂", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "arm", "meaning": "手臂", "pos": "n.", "lesson": "L2", "section": "Word Power", "past": "", "ex": "break his arm", "exz": "弄斷他的手臂", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "computer", "meaning": "電腦", "pos": "n.", "lesson": "L2", "section": "Word Power", "past": "", "ex": "play computer games", "exz": "玩電腦遊戲", "exs": "L2 Word Power p.22", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "choose", "meaning": "選擇", "pos": "v.", "lesson": "L2", "section": "Reading", "past": "chose", "ex": "Most people in Taiwan can choose their husband or wife.", "exz": "台灣大多數人可以選擇自己的丈夫或妻子。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "children", "meaning": "小孩（child 複數）", "pos": "n.", "lesson": "L2", "section": "Reading", "past": "", "ex": "Millions of children under the age of eighteen get married without a choice.", "exz": "數百萬名未滿十八歲的孩子在沒有選擇的情況下結婚。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "age", "meaning": "年齡", "pos": "n.", "lesson": "L2", "section": "Reading", "past": "", "ex": "Millions of children under the age of eighteen get married without a choice.", "exz": "數百萬名未滿十八歲的孩子在沒有選擇的情況下結婚。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "without", "meaning": "沒有", "pos": "prep.", "lesson": "L2", "section": "Reading", "past": "", "ex": "Millions of children under the age of eighteen get married without a choice.", "exz": "數百萬名未滿十八歲的孩子在沒有選擇的情況下結婚。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "baby", "meaning": "嬰兒", "pos": "n.", "lesson": "L2", "section": "Reading", "past": "", "ex": "Geeta had her first baby and became a mother at eleven.", "exz": "Geeta 生下第一個孩子，十一歲就當了媽媽。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "become", "meaning": "成為；變成", "pos": "v.", "lesson": "L2", "section": "Reading", "past": "became", "ex": "Geeta had her first baby and became a mother at eleven.", "exz": "Geeta 生下第一個孩子，十一歲就當了媽媽。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "cry", "meaning": "哭泣", "pos": "v.", "lesson": "L2", "section": "Reading", "past": "cried", "ex": "She cried and said \"NO!\", but nobody helped her.", "exz": "她哭著說「不要！」，但沒有人幫她。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "nobody", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "nobody", "meaning": "沒有人", "pos": "pron.", "lesson": "L2", "section": "Reading", "past": "", "ex": "She cried and said \"NO!\", but nobody helped her.", "exz": "她哭著說「不要！」，但沒有人幫她。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "scared", "marriage", "read", "have", "can", "run", "give"]}, {"word": "scared", "meaning": "害怕的", "pos": "adj.", "lesson": "L2", "section": "Reading", "past": "", "ex": "She was scared and could not sleep at night.", "exz": "她很害怕，晚上睡不著。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "marriage", "read", "have", "can", "run", "give"]}, {"word": "take action", "meaning": "採取行動", "pos": "phr.", "lesson": "L2", "section": "Reading", "past": "took action", "ex": "Children like Geeta and Tanya need our help. Let's take action now!", "exz": "像 Geeta 和 Tanya 這樣的孩子需要我們的幫助，現在就採取行動吧！", "exs": "L2 Reading p.23", "pool": ["a few", "pass away", "remind ... of", "look after", "after all", "dress up", "get married", "not ... anymore"]}, {"word": "marriage", "meaning": "婚姻", "pos": "n.", "lesson": "L2", "section": "Reading", "past": "", "ex": "The marriage was like a nightmare.", "exz": "那場婚姻就像一場惡夢。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "read", "have", "can", "run", "give"]}, {"word": "read", "meaning": "閱讀", "pos": "v.", "lesson": "L2", "section": "不規則動詞", "past": "read", "ex": "No, I didn't. But guess what? I read a special book.", "exz": "沒有。但你猜怎麼著？我讀了一本特別的書。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "have", "can", "run", "give"]}, {"word": "have", "meaning": "有", "pos": "v.", "lesson": "L2", "section": "不規則動詞", "past": "had", "ex": "She had no choice.", "exz": "她沒有選擇。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "can", "run", "give"]}, {"word": "can", "meaning": "能夠", "pos": "aux.", "lesson": "L2", "section": "不規則動詞", "past": "could", "ex": "She could not go to school anymore.", "exz": "她不能再去上學了。", "exs": "L2 Dialogue p.19", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "run", "give"]}, {"word": "run", "meaning": "跑", "pos": "v.", "lesson": "L2", "section": "不規則動詞", "past": "ran", "ex": "She couldn't stand it, so she ran away.", "exz": "她受不了，所以逃走了。", "exs": "L2 Dialogue p.20", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "give"]}, {"word": "give", "meaning": "給", "pos": "v.", "lesson": "L2", "section": "不規則動詞", "past": "gave", "ex": "Tanya got married to a man at eleven because he gave her father money.", "exz": "Tanya 十一歲結婚，因為那個男人給了她父親錢。", "exs": "L2 Reading p.23", "pool": ["math", "test", "guess", "well", "why", "sell", "because", "poor", "happen", "hit", "terrible", "ever", "finish", "curious", "ending", "stand", "shoe", "buy", "pair", "pick", "chocolate", "break", "arm", "computer", "choose", "children", "age", "without", "baby", "become", "cry", "nobody", "scared", "marriage", "read", "have", "can", "run"]}], "vocabQ": [{"q": "John: Liam, when is Mia's potluck?　Liam: Sorry, I don't ______.", "opts": ["remember", "remind", "study", "watch"], "ans": 0, "why": "remember＝自己記得；remind 是「使某人想起」，主詞不同。", "point": "L1 單字", "src": "習作 L1 Part 1"}, {"q": "Emma ______ with Eric yesterday morning.", "opts": ["jogged", "jogs", "jogging", "jog"], "ans": 0, "why": "yesterday morning＝過去，jog 短母音＋子音要雙寫成 jogged。", "point": "L1 單字＋過去式", "src": "習作 L1 Part 1"}, {"q": "Mary: Did you ______ for the test?　Tony: Yes, I did.", "opts": ["study", "studied", "studies", "studying"], "ans": 0, "why": "Did 後面動詞一律用原形。", "point": "L1 單字＋did 問句", "src": "習作 L1 Part 1"}, {"q": "Terry: I'm home! What's for lunch?　Mom: You ______ be hungry.", "opts": ["must", "can", "did", "were"], "ans": 0, "why": "must＝一定（推測語氣）。", "point": "L1 單字", "src": "習作 L1 Part 1"}, {"q": "Sam and Sara are brother and sister. They always walk to school ______.", "opts": ["together", "sweet", "later", "meal"], "ans": 0, "why": "together＝一起，副詞放句尾。", "point": "L1 單字", "src": "習作 L1 Part 1"}, {"q": "Tom always enjoys his evening ______ with his sister.", "opts": ["meal", "music", "memory", "candy"], "ans": 0, "why": "meal＝餐（evening meal＝晚餐）。", "point": "L1 單字", "src": "習作 L1 Part 1"}, {"q": "Lily really likes the candy. It is so ______.", "opts": ["sweet", "dead", "lively", "poor"], "ans": 0, "why": "sweet 一字兩義：甜的／貼心的，這裡指糖果很甜。", "point": "L1 單字（一字多義）", "src": "習作 L1 Part 1"}, {"q": "Alan listened to ______ in the living room this morning.", "opts": ["music", "meal", "memory", "movie"], "ans": 0, "why": "listen to music＝聽音樂，固定搭配。", "point": "L1 單字", "src": "習作 L1 Part 1"}, {"q": "Judy cooked for her ______ for the first time this weekend.", "opts": ["parents", "relative", "ghost", "candle"], "ans": 0, "why": "parents＝父母親（恆為複數）。", "point": "L1 單字", "src": "習作 L1 Part 1"}, {"q": "David worked in a hotel at the ______ of eighteen.", "opts": ["age", "pair", "math", "baby"], "ans": 0, "why": "at the age of ＋數字＝在幾歲時。", "point": "L2 單字", "src": "習作 L2 Part 1"}, {"q": "Ted wore a new ______ of shoes today.", "opts": ["pair", "age", "arm", "test"], "ans": 0, "why": "a pair of ＋複數名詞＝一雙／一副。", "point": "L2 單字", "src": "習作 L2 Part 1"}, {"q": "My big sister had a ______ last night. I am so happy.", "opts": ["baby", "marriage", "ending", "test"], "ans": 0, "why": "have a baby＝生小孩。", "point": "L2 單字", "src": "習作 L2 Part 1"}, {"q": "______ finished their homework, so the teacher was very angry.", "opts": ["Nobody", "Everybody", "Somebody", "Anybody"], "ans": 0, "why": "nobody 本身就是否定，不必再加 not；後面動詞用單數。", "point": "L2 單字（否定代名詞）", "src": "習作 L2 Part 1"}, {"q": "The ______ won the game because they didn't give up.", "opts": ["children", "child", "childs", "childrens"], "ans": 0, "why": "child 的複數是 children（不規則）。", "point": "L2 單字（不規則複數）", "src": "習作 L2 Part 1"}, {"q": "He ______ his old bike for $500.", "opts": ["sold", "sells", "selling", "sell"], "ans": 0, "why": "sell 的過去式是 sold（不規則）。", "point": "L2 單字＋不規則過去式", "src": "習作 L2 Part 2"}, {"q": "What ______ to Judy? Why is she crying?", "opts": ["happened", "happens", "happen", "happening"], "ans": 0, "why": "What happened to…?＝…怎麼了，固定用過去式問已發生的事。", "point": "L2 單字＋句型", "src": "習作 L2 Part 2"}, {"q": "Lily was a ______ stray cat two years ago, but she's my family now.", "opts": ["poor", "terrible", "curious", "scared"], "ans": 0, "why": "poor 一字兩義：貧窮的／可憐的，這裡是可憐的。", "point": "L2 單字（一字多義）", "src": "習作 L2 Part 2"}, {"q": "Alex ______ very famous after the show.", "opts": ["became", "becomes", "become", "becoming"], "ans": 0, "why": "become 的過去式是 became。", "point": "L2 單字＋不規則過去式", "src": "習作 L2 Part 2"}, {"q": "I could never win this game ______ your help.", "opts": ["without", "with", "about", "after"], "ans": 0, "why": "without＝沒有（介系詞）。", "point": "L2 單字", "src": "習作 L2 Part 2"}, {"q": "Tom was ______ because he saw a big dog.", "opts": ["scared", "curious", "terrible", "poor"], "ans": 0, "why": "scared＝害怕的（形容人的感受）。", "point": "L2 單字", "src": "習作 L2 Part 2"}, {"q": "Sally ______ her leg yesterday, so she doesn't come to school today.", "opts": ["broke", "breaks", "break", "breaking"], "ans": 0, "why": "break 的過去式是 broke。", "point": "L2 單字＋不規則過去式", "src": "習作 L2 Part 2"}, {"q": "這部電影很感人。The movie was very ______.", "opts": ["touching", "touched", "touch", "touches"], "ans": 0, "why": "touching＝令人感動的（修飾事物）；touched 是人被感動。", "point": "L1 單字（延伸）", "src": "延伸"}, {"q": "他們用歡樂的方式紀念祖先。They remember their ancestors in a ______ way.", "opts": ["lively", "live", "living", "life"], "ans": 0, "why": "lively＝充滿活力的（形容詞），課文原句用法。", "point": "L1 單字（延伸）", "src": "延伸"}, {"q": "我對這本書的結局很好奇。I'm curious about the ______ of this book.", "opts": ["ending", "end", "ended", "ends"], "ans": 0, "why": "ending＝結局（名詞），課本標為延伸字。", "point": "L2 單字（延伸）", "src": "延伸"}], "phrase": [{"q": "爺爺去年過世了。Grandpa ______ last year.", "opts": ["passed away", "looked after", "dressed up", "took action"], "ans": 0, "why": "pass away＝過世（比 die 委婉），過去式 passed away。", "point": "pass away", "src": "課本 p.4"}, {"q": "Zuri: Did Daniel ______ his brother?　Odin: Yes, he did.", "opts": ["look after", "look for", "look up", "look at"], "ans": 0, "why": "look after＝照顧；look for 是尋找、look up 是查閱。", "point": "look after", "src": "習作 L1 Part 5"}, {"q": "這首歌讓我想起我的童年。This song ______ me ______ my childhood.", "opts": ["reminds / of", "remembers / of", "reminds / to", "reminds / about"], "ans": 0, "why": "remind ＋ 人 ＋ of ＋ 事，介系詞固定用 of。", "point": "remind…of", "src": "課本 p.4"}, {"q": "沒關係，畢竟他還是個孩子。It's OK. ______, he is still a child.", "opts": ["After all", "At all", "In all", "After that"], "ans": 0, "why": "after all＝畢竟，用來補一個理由。", "point": "after all", "src": "課本 p.4"}, {"q": "人們彩繪臉並裝扮起來。People paint their faces and ______ in costumes.", "opts": ["dress up", "put on", "wear up", "take off"], "ans": 0, "why": "dress up in ＋服裝＝裝扮成。", "point": "dress up", "src": "課本 p.6"}, {"q": "幾年前，我的父母非常忙。______ years ago, my parents were very busy.", "opts": ["A few", "A little", "A lot", "Few of"], "ans": 0, "why": "a few ＋可數名詞複數（years）；a little 接不可數。", "point": "a few", "src": "課本 p.4"}, {"q": "她十一歲時就和一個男人結婚。She ______ a man at eleven.", "opts": ["got married to", "got married with", "got marriage to", "was married with"], "ans": 0, "why": "get married <b>to</b> 某人，不是 with。過去式 got married。", "point": "get married", "src": "課本 p.20"}, {"q": "他不再住在那裡了。He doesn't live there ______.", "opts": ["anymore", "no more", "never", "already"], "ans": 0, "why": "not … anymore＝不再，anymore 放句尾。", "point": "not…anymore", "src": "課本 p.20"}, {"q": "我們現在就採取行動吧！Let's ______ now!", "opts": ["take action", "make action", "do action", "take actions"], "ans": 0, "why": "take action＝採取行動，課文最後一句。過去式 took action。", "point": "take action", "src": "課本 p.24"}, {"q": "她受不了了，所以逃走了。She couldn't ______ it, so she ran away.", "opts": ["stand", "sit", "take", "hold"], "ans": 0, "why": "stand 在這裡是「忍受」，不是「站」——一字多義。", "point": "stand（一字多義）", "src": "課本 p.20"}], "grammar": [{"q": "Where ______ Sofia yesterday evening?", "opts": ["was", "is", "are", "were"], "ans": 0, "why": "Sofia 是單數第三人稱，過去用 was。", "point": "be 動詞過去式", "src": "習作 L1 Part 5"}, {"q": "Eric: When did Mason visit Taiwan?　Vera: He visited Taiwan ______ winter.", "opts": ["last", "every", "same", "long"], "ans": 0, "why": "last winter＝去年冬天，配合過去式 visited。", "point": "過去時間詞", "src": "習作 L1 Part 5"}, {"q": "Zuri: Did Daniel look after his brother?　Odin: Yes, he ______.", "opts": ["did", "is", "can", "does"], "ans": 0, "why": "用 Did 問就用 did 答，助動詞要一致。", "point": "did 簡答", "src": "習作 L1 Part 5"}, {"q": "Andy: ______ you late for school this morning?　Kira: No, I wasn't.", "opts": ["Were", "Are", "Do", "Did"], "ans": 0, "why": "回答用 wasn't（be 動詞），所以問句要用 Were。", "point": "be 動詞過去式疑問句", "src": "習作 L1 Part 5"}, {"q": "There ______ any students at school a week ago.", "opts": ["weren't", "isn't", "aren't", "wasn't"], "ans": 0, "why": "a week ago＝過去；students 是複數 → weren't。", "point": "There was／were", "src": "習作 L1 Part 5"}, {"q": "Peter: Who ______ the sofa in the living room?　Julia: My father did.", "opts": ["moved", "move", "moves", "moving"], "ans": 0, "why": "回答是 My father did（過去），所以問句用過去式 moved。", "point": "一般動詞過去式", "src": "習作 L1 Part 5"}, {"q": "Nala: How ______ you go to the restaurant last Friday?　Lian: I walked there.", "opts": ["did", "are", "can", "do"], "ans": 0, "why": "last Friday＝過去，疑問詞後接 did ＋原形動詞 go。", "point": "疑問詞＋did", "src": "習作 L1 Part 5"}, {"q": "Rene: ______ you busy this morning?　Gwen: Yes, I ______.", "opts": ["Were; was", "Was; was", "Did; did", "Were; were"], "ans": 0, "why": "主詞 you 用 Were 問；回答主詞是 I，所以用 was。", "point": "was／were 的主詞配合", "src": "習作 L1 Part 5"}, {"q": "There ______ many things in the bedroom yesterday. But there ______ anything in the bedroom today.", "opts": ["were; isn't", "are; aren't", "are; wasn't", "were; weren't"], "ans": 0, "why": "前句 yesterday＋複數用 were；後句 today＋anything（單數）用 isn't。", "point": "There be 的時態與單複數", "src": "習作 L1 Part 5"}, {"q": "下列動詞過去式，哪一組<b>全部正確</b>？", "opts": ["plan → planned；study → studied；invite → invited", "plan → planed；study → studyed；invite → invited", "plan → planned；study → studied；invite → invitted", "plan → planed；study → studied；invite → invited"], "ans": 0, "why": "plan 短母音＋子音要雙寫；study 子音＋y 去 y 加 ied；invite 字尾 e 只加 d。", "point": "規則動詞變化", "src": "習作 L1 Part 2"}, {"q": "My mom was a teacher five years ______, but she is a housewife now.", "opts": ["ago", "last", "yesterday", "before"], "ans": 0, "why": "「一段時間 ＋ ago」＝…之前。", "point": "ago／last／yesterday", "src": "習作 L1 Part 3"}, {"q": "Did you go to the swimming pool ______ afternoon? I didn't see you.", "opts": ["yesterday", "last", "ago", "the last"], "ans": 0, "why": "yesterday afternoon＝昨天下午；last 要接 night／week 等。", "point": "ago／last／yesterday", "src": "習作 L1 Part 3"}, {"q": "I was very hungry, ______ I ate some bread last night.", "opts": ["so", "because", "but", "or"], "ans": 0, "why": "前面是原因、後面是結果 → 用 so 接結果。", "point": "so 接結果", "src": "習作 L2 Part 4"}, {"q": "______ Jenny didn't like chocolate, she gave it to her sister.", "opts": ["Because", "So", "But", "And"], "ans": 0, "why": "句首接原因用 Because；so 不能放句首。", "point": "because 放句首", "src": "習作 L2 Part 4"}, {"q": "Julie was late ______ she didn't catch the bus.", "opts": ["because", "so", "and", "but"], "ans": 0, "why": "後面接的是原因（沒趕上公車）。", "point": "because 接原因", "src": "習作 L2 Part 4"}, {"q": "Edward visited his grandma last weekend, ______ he didn't come to our party.", "opts": ["so", "because", "but", "or"], "ans": 0, "why": "去看奶奶是原因、沒來派對是結果 → so。", "point": "so 接結果", "src": "習作 L2 Part 4"}, {"q": "Ken: ______ did John do this morning?　Mandy: He did nothing.", "opts": ["What", "Why", "How", "Where"], "ans": 0, "why": "回答是「做了什麼（nothing）」，所以問句用 What。", "point": "疑問詞", "src": "習作 L2 Part 5"}, {"q": "Brian: ______ do you love basketball?　Michael: Because it is exciting.", "opts": ["Why", "Who", "How", "Where"], "ans": 0, "why": "回答用 Because（原因），問句就要用 Why。", "point": "Why…? Because…", "src": "習作 L2 Part 5"}, {"q": "Alex: Did Hank ______ any sport today?　Irene: No, he was at home.", "opts": ["play", "plays", "played", "playing"], "ans": 0, "why": "Did 後面動詞一律用原形。", "point": "did ＋原形動詞", "src": "習作 L2 Part 5"}, {"q": "下列動詞過去式，哪一組<b>全部正確</b>？", "opts": ["choose → chose；wear → wore；meet → met", "choose → choosed；wear → weared；meet → met", "choose → chose；wear → wore；meet → meeted", "choose → chosed；wear → wore；meet → met"], "ans": 0, "why": "這三個都是不規則動詞，沒有規則可循，只能背。", "point": "不規則動詞", "src": "習作 L2 Part 3"}, {"q": "關於 hit 和 read 的過去式，正確的是：", "opts": ["hit → hit；read → read（發音改變）", "hit → hitted；read → readed", "hit → hit；read → readed", "hit → hitted；read → read"], "ans": 0, "why": "兩個字的過去式拼法都不變，但 read 的過去式發音要唸成 [rɛd]。", "point": "不規則動詞（同形）", "src": "習作 L2 Part 3"}, {"q": "You looked sick. Did you eat ______ for lunch today?", "opts": ["anything bad", "bad thing", "bad something", "any bad"], "ans": 0, "why": "something／anything／nothing 後面的形容詞要<b>放後面</b>；疑問句用 anything。", "point": "不定代名詞＋形容詞（段考補充）", "src": "段考 113-1-1 第20題"}, {"q": "I want to eat ______ tonight. How about hot pot?", "opts": ["something special", "special something", "any special", "special anything"], "ans": 0, "why": "肯定句用 something，形容詞 special 放後面。", "point": "不定代名詞＋形容詞（段考補充）", "src": "延伸"}, {"q": "Amy was very happy because she won the game.　＝", "opts": ["Amy won the game, so she was very happy.", "Because Amy won the game, so she was very happy.", "Amy won the game, because she was very happy.", "So Amy won the game, she was very happy."], "ans": 0, "why": "because 的句子改寫成 so 時，<b>原因與結果要對調</b>，而且只能留一個連接詞。這是 Review 1 課本原表的示範。", "point": "Review 1：because↔so 句型轉換", "src": "課本 p.34"}, {"q": "下列哪一組「時間副詞」全部都要搭配過去式？", "opts": ["yesterday ／ two days ago ／ last night", "yesterday ／ every day ／ last night", "now ／ two days ago ／ last night", "yesterday ／ two days ago ／ tomorrow"], "ans": 0, "why": "課本 Review 1 直接列出：<b>yesterday ／ …ago ／ last…</b> 是過去式的時間線索。", "point": "Review 1：過去式時間副詞", "src": "課本 p.33"}, {"q": "Rex didn't feel the earthquake this morning. He ______ in the park at that time.", "opts": ["was jogging", "jogged", "has jogged", "would jog"], "ans": 0, "why": "at that time＝地震那一刻「正在」慢跑 → 過去進行式。這正是會考最愛的考法。", "point": "過去進行式（會考題型）", "src": "延伸"}, {"q": "I ______ this book twice, so I know the ending well.", "opts": ["have read", "read", "was reading", "will read"], "ans": 0, "why": "twice＝到現在為止的經驗 → 現在完成式。", "point": "現在完成式（會考題型）", "src": "延伸"}, {"q": "Tom ______ in Tainan for three years before he moved to Taipei.", "opts": ["lived", "has lived", "lives", "is living"], "ans": 0, "why": "整件事在 before he moved（過去）之前就結束了 → 過去簡單式。for 不等於現在完成。", "point": "過去 vs 現在完成（會考題型）", "src": "延伸"}], "pattern": [{"q": "Emma watched the movie two hours ago.　依畫線部分（watched the movie）造問句：", "opts": ["What did Emma do two hours ago?", "What did Emma watched two hours ago?", "What Emma did two hours ago?", "What does Emma do two hours ago?"], "ans": 0, "why": "問「做了什麼」用 What did ＋主詞＋<b>原形</b> do。watched 要變回 do。", "point": "What did … do?", "src": "習作 L1 Part 4"}, {"q": "No, I didn't visit the museum with Sam last summer.　還原成問句：", "opts": ["Did you visit the museum with Sam last summer?", "Did you visited the museum with Sam last summer?", "Do you visit the museum with Sam last summer?", "Were you visit the museum with Sam last summer?"], "ans": 0, "why": "回答用 didn't，問句就用 Did ＋主詞＋原形動詞。", "point": "Did…? 問句", "src": "習作 L1 Part 4"}, {"q": "Are there any tables in the dining room today?　把 today 改成 yesterday：", "opts": ["Were there any tables in the dining room yesterday?", "Was there any tables in the dining room yesterday?", "Did there any tables in the dining room yesterday?", "Are there any tables in the dining room yesterday?"], "ans": 0, "why": "tables 是複數 → Are 的過去式是 Were。", "point": "There be 時態轉換", "src": "習作 L1 Part 4"}, {"q": "重組：at the party ／ from different countries ／ People ／ and danced ／ dressed up in costumes", "opts": ["People from different countries dressed up in costumes and danced at the party.", "People dressed up in costumes from different countries and danced at the party.", "From different countries people dressed up in costumes and danced at the party.", "People from different countries and danced dressed up in costumes at the party."], "ans": 0, "why": "主詞（People）＋修飾語（from different countries）＋兩個並列動詞（dressed up… and danced）＋地點。", "point": "句子重組", "src": "習作 L1 Part 4"}, {"q": "看圖回答：Did Eric jog last weekend?（圖中 Eric 正在慢跑）", "opts": ["Yes, he jogged last weekend.", "Yes, he jog last weekend.", "Yes, he did jogged last weekend.", "Yes, he was jog last weekend."], "ans": 0, "why": "完整回答時，動詞要自己變過去式 jogged（不是留原形）。", "point": "Did…? 完整回答", "src": "習作 L1 Part 6"}, {"q": "Q: What did Adam ______ yesterday?　A: He ______ the bedroom yesterday.", "opts": ["do / painted", "did / painted", "do / paint", "did / paint"], "ans": 0, "why": "問句有 did → 用原形 do；回答沒有助動詞 → 動詞自己變過去式 painted。", "point": "What did…do? 的一問一答", "src": "習作 L1 Part 6"}, {"q": "Did Ruby study English this morning?（圖中 Ruby 在看電視）完整否定回答：", "opts": ["No, she didn't study English this morning.", "No, she didn't studied English this morning.", "No, she doesn't study English this morning.", "No, she wasn't study English this morning."], "ans": 0, "why": "didn't 後面接原形 study。", "point": "Did…? 否定回答", "src": "習作 L1 Part 6"}, {"q": "「那部電影讓我想起我的祖父。」＝", "opts": ["It reminded me of my grandfather.", "It remembered me my grandfather.", "It reminded me my grandfather.", "It was reminded of my grandfather."], "ans": 0, "why": "remind ＋人＋ of ＋事；整句在講過去，用 reminded。", "point": "It reminded me of…", "src": "課本 p.3"}, {"q": "「他們用歡樂的方式紀念過世的親人。」＝", "opts": ["They remember their dead relatives in a lively way.", "They remember their died relatives in a lively way.", "They remember their dead relatives in lively way.", "They are remembering their dead relatives in a lively ways."], "ans": 0, "why": "dead 是形容詞（died 是動詞過去式）；in a ... way 的 a 不能省。", "point": "in a … way", "src": "課本 p.7"}, {"q": "「我對這個故事的結局很好奇。」＝", "opts": ["I'm curious about the ending of this story.", "I'm curious of the ending of this story.", "I'm curious the ending of this story.", "I'm curious for the ending of this story."], "ans": 0, "why": "be curious <b>about</b> something。", "point": "be curious about…", "src": "課本 p.20"}, {"q": "「Geeta 因為要照顧寶寶，所以不能去上學。」＝", "opts": ["Geeta could not go to school because her baby needed her.", "Because Geeta's baby needed her, so she could not go to school.", "Geeta could not went to school because her baby needed her.", "Geeta can not go to school because her baby needed her."], "ans": 0, "why": "because 和 so 只能留一個；could 後面接原形 go；整句是過去，用 could 不用 can。", "point": "because／so＋could", "src": "課本 p.23"}, {"q": "「這場婚姻像一場惡夢。」＝", "opts": ["The marriage was like a nightmare.", "The marriage was liked a nightmare.", "The marriage like a nightmare.", "The marriage was as a nightmare."], "ans": 0, "why": "like 在這裡是介系詞「像」，前面要有 be 動詞。", "point": "was like …", "src": "課本 p.23"}], "vocab2000": [{"rng": "p.119-131", "q": "There are twenty ______ on the bus now. Many of them are using their cell phones.", "opts": ["passengers", "platforms", "sidewalks", "highways"], "ans": 0, "why": "passenger＝乘客。platform 月台／sidewalk 人行道／highway 公路，都是同一組交通類字。", "point": "2000 單：交通", "src": "段考 113-1-1 第16題"}, {"rng": "p.119-131", "q": "He ______ to America three times a year.", "opts": ["flies", "flyed", "flied", "flying"], "ans": 0, "why": "three times a year＝習慣，用現在式；fly 是子音＋y，第三人稱單數去 y 加 -ies。<b>沒有過去時間線索就不要寫過去式。</b>", "point": "2000 單＋動詞三單", "src": "段考 113-1-1 第17題"}, {"rng": "p.119-131", "q": "The rainbow is like a ______ in the sky.", "opts": ["bridge", "wheel", "tube", "wok"], "ans": 0, "why": "bridge＝橋（彩虹像一座橋）。wheel 輪子／tube 管子／wok 炒鍋。", "point": "2000 單：日常名詞", "src": "段考 113-1-1 第18題"}, {"rng": "p.119-131", "q": "I don't have much ______ in my bedroom.", "opts": ["furniture", "dressers", "chairs", "hangers"], "ans": 0, "why": "<b>furniture 是不可數名詞</b>，前面才能用 much；dressers／chairs／hangers 都是可數複數，要用 many。", "point": "2000 單＋可數不可數", "src": "段考 113-1-1 第19題"}, {"rng": "p.119-131", "q": "「月台」的英文是？", "opts": ["platform", "sidewalk", "highway", "passenger"], "ans": 0, "why": "platform＝月台，交通類常考字。", "point": "2000 單：交通", "src": "延伸（同題誘答項）"}, {"rng": "p.119-131", "q": "「人行道」的英文是？", "opts": ["sidewalk", "highway", "platform", "bridge"], "ans": 0, "why": "sidewalk＝人行道。", "point": "2000 單：交通", "src": "延伸（同題誘答項）"}, {"rng": "p.119-131", "q": "「衣架」的英文是？", "opts": ["hanger", "dresser", "wheel", "tube"], "ans": 0, "why": "hanger＝衣架；dresser＝梳妝台。", "point": "2000 單：居家", "src": "延伸（同題誘答項）"}, {"rng": "p.119-131", "q": "「炒鍋」的英文是？", "opts": ["wok", "tube", "wheel", "hanger"], "ans": 0, "why": "wok＝炒鍋（中式），是 2000 字表裡的生活用具字。", "point": "2000 單：居家", "src": "延伸（同題誘答項）"}, {"rng": "p.132-143", "q": "Billy's mom took him to the ______ because he needed a doctor.", "opts": ["hospital", "bakery", "hotel", "church"], "ans": 0, "why": "需要醫生 → hospital 醫院。", "point": "2000 單：場所", "src": "段考 113-1-2 第16題"}, {"rng": "p.132-143", "q": "In our school, there is no ______, so students bring their lunch every day.", "opts": ["cafeteria", "village", "temple", "park"], "ans": 0, "why": "cafeteria＝自助餐廳／學生餐廳。", "point": "2000 單：場所", "src": "段考 113-1-2 第17題"}, {"rng": "p.132-143", "q": "A(n) ______ usually looks after children, cooks and cleans the house at home.", "opts": ["housewife", "engineer", "clerk", "actress"], "ans": 0, "why": "housewife＝家庭主婦。注意題目用了 <b>look after</b>（L1 片語）。", "point": "2000 單：職業", "src": "段考 113-1-2 第19題"}, {"rng": "p.132-143", "q": "Let's go to the ______. I want to buy blue pens and notebooks.", "opts": ["stationery store", "fire station", "movie theater", "culture center"], "ans": 0, "why": "stationery store＝文具店。", "point": "2000 單：場所", "src": "段考 113-1-2 第20題"}, {"rng": "p.144-158", "q": "The job of a ______ is to write news stories for newspapers or television.", "opts": ["journalist", "judge", "sailor", "priest"], "ans": 0, "why": "journalist＝記者。", "point": "2000 單：職業", "src": "段考 113-1-3 第16題"}, {"rng": "p.144-158", "q": "People use camels to carry things in the ______.", "opts": ["desert", "forest", "woods", "mountains"], "ans": 0, "why": "駱駝 → desert 沙漠。", "point": "2000 單：自然", "src": "段考 113-1-3 第17題"}, {"rng": "p.144-158", "q": "Be careful when you drive on a ______ day. You cannot see clearly.", "opts": ["foggy", "sunny", "windy", "natural"], "ans": 0, "why": "看不清楚 → foggy 起霧的。", "point": "2000 單：天氣", "src": "段考 113-1-3 第18題"}, {"rng": "p.144-158", "q": "There are usually a lot of food ______ at the night markets.", "opts": ["vendors", "thunders", "barbers", "showers"], "ans": 0, "why": "vendor＝小販；barber 理髮師／shower 陣雨、淋浴。", "point": "2000 單：職業", "src": "段考 113-1-3 第19題"}, {"rng": "p.144-158", "q": "It is ______ to travel between the cities by bus.", "opts": ["convenient", "low", "modern", "serious"], "ans": 0, "why": "convenient＝方便的。", "point": "2000 單：形容詞", "src": "段考 113-1-3 第21題"}, {"rng": "p.144-158", "q": "I am so hungry. Let's ______ some food and drinks on the app.", "opts": ["order", "forget", "lend", "print"], "ans": 0, "why": "order＝點餐、訂購。", "point": "2000 單：動詞", "src": "段考 113-1-3 第23題"}]};
+const KEY = "nanyi8_l1l2_v2";
+const S = load();
+function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {done:{},pass:{},best:{}}; }
+                 catch(e){ return {done:{},pass:{},best:{}}; } }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* 分頁 */
+document.querySelectorAll(".tab").forEach(t=>{
+  t.onclick = ()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));
+    t.classList.add("on");
+    const k=t.dataset.tab;
+    ["tb","ex","wd","qz"].forEach(id=>document.getElementById(id).classList.toggle("hide", id!==k));
+    if(k==="qz") renderStages();
+    if(k==="wd") renderModes();
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+});
+
+/* 課次切換 */
+document.querySelectorAll(".lsw button").forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll(".lsw button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.querySelectorAll(".lesson-pane").forEach(p=>{
+      p.hidden = (p.dataset.lesson !== b.dataset.lesson);
+    });
+  };
+});
+
+/* 讀完打勾 */
+function paintDone(){
+  document.querySelectorAll(".chk").forEach(c=> c.classList.toggle("done", !!S.done[c.dataset.done]));
+  document.querySelectorAll(".donebtn").forEach(b=>{
+    const d=!!S.done[b.dataset.uid];
+    b.classList.toggle("off",d);
+    b.textContent = d ? "已完成（再按一次取消）" : (b.dataset.uid.indexOf("-")>0 ? "這一段我學完了 ✓" : "這一段我讀完了 ✓");
+  });
+}
+document.querySelectorAll(".donebtn").forEach(b=>{
+  b.onclick=()=>{ S.done[b.dataset.uid]=!S.done[b.dataset.uid]; save(); paintDone(); renderStages(); };
+});
+paintDone();
+
+/* 小考 */
+const STAGES=[
+  {id:"vocabQ", name:"第 1 關　單字", desc:"習作 Fill In 改寫＋課本單字", n:14},
+  {id:"phrase", name:"第 2 關　片語", desc:"課本片語與固定搭配", n:10},
+  {id:"grammar",name:"第 3 關　文法", desc:"習作 Choose／because so ＋時態延伸", n:14},
+  {id:"pattern",name:"第 4 關　課文句型", desc:"習作造句改寫＋課文句型", n:8},
+  {id:"vocab2000",name:"第 5 關　2000 單字", desc:"段考指定字表 p.119-131（第一次段考範圍）", n:8},
+];
+/* 2000 單字表分三段；預設只考第一次段考範圍，之後可改成 p.132-143 / p.144-158 */
+let RANGE_2000 = "p.119-131";
+/* 小考不設前置條件：不需要先讀完課本教學也能直接練 */
+function teachOK(){ return true; }
+function renderStages(){
+  const ok=teachOK();
+  document.getElementById("gate").innerHTML =
+    "隨時可以開始練，<b>不需要先讀完教學</b>。每關答對 <b>80%</b> 會解開下一關；"
+    + "答錯時會告訴你考點與出處，想補觀念再回「課本教學」那一頁就好。";
+  const box=document.getElementById("stages"); box.innerHTML="";
+  STAGES.forEach((st,i)=>{
+    const prev = i===0 ? ok : !!S.pass[STAGES[i-1].id];
+    const lock = !ok || !prev;
+    const best = S.best[st.id];
+    const el=document.createElement("div");
+    el.className="stage s"+(i+1)+(lock?" lock":"");
+    el.innerHTML='<div class="sno">'+(i+1)+'</div><div class="sinfo"><b>'+st.name+
+      '</b><span>'+st.desc+'　'+st.n+' 題</span></div><div class="badge '+(S.pass[st.id]?"pass":"")+'">'+
+      (best!==undefined? ("最佳 "+best+"%") : (lock?"未解鎖":"開始"))+'</div>';
+    if(!lock) el.onclick=()=>start(st);
+    box.appendChild(el);
+  });
+  document.getElementById("runner").classList.add("hide");
+  box.classList.remove("hide");
+}
+
+/* Fisher-Yates：每次載入都重洗，正解不會固定在同一個位置 */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pick(arr,n){return shuffle(arr).slice(0,n);}
+
+function buildQuestions(st){
+  let src=DATA[st.id];
+  if(st.id==="vocab2000"){
+    const inRange = src.filter(q=>q.rng===RANGE_2000);
+    src = inRange.length>=4 ? inRange : src;   // 該範圍題數太少時才放寬
+  }
+  const chosen=pick(src, Math.min(st.n, src.length));
+  const qs=chosen.map(o=>{
+    const pairs=o.opts.map((t,i)=>({t,ok:i===o.ans}));
+    const sh=shuffle(pairs);
+    return {q:o.q, opts:sh.map(p=>p.t), ans:sh.findIndex(p=>p.ok), why:o.why, point:o.point, src:o.src};
+  });
+  /* 單字關題數不足時，用課本字表自動補題 */
+  if(st.id==="vocabQ" && qs.length<st.n){
+    pick(DATA.vocab, st.n-qs.length).forEach(v=>{
+      const opts=shuffle([v.word,...pick(v.pool,3)]);
+      qs.push({q:"「"+v.meaning+"」的英文是？", opts, ans:opts.indexOf(v.word),
+               why:v.word+"（"+v.pos+"）"+v.meaning+(v.past?"　過去式："+v.past:""),
+               point:v.lesson+" "+v.section, src:"課本字表"});
+    });
+  }
+  return shuffle(qs);
+}
+
+let cur=null;
+function start(st){
+  cur={st, qs:buildQuestions(st), i:0, right:0, wrong:[]};
+  document.getElementById("stages").classList.add("hide");
+  document.getElementById("runner").classList.remove("hide");
+  paintQ();
+}
+function paintQ(){
+  const r=document.getElementById("runner"), {qs,i,st}=cur;
+  if(i>=qs.length) return finish();
+  const q=qs[i];
+  r.innerHTML='<div class="bar"><i style="width:'+(i/qs.length*100)+'%"></i></div>'+
+    '<div class="qcard"><div class="qhead"><span>'+st.name+'</span><span>'+(i+1)+' / '+qs.length+'</span></div>'+
+    '<div class="qtext">'+q.q+'</div><div id="opts"></div><div id="exp"></div>'+
+    '<div class="nav hide" id="nav"><button class="ghost" id="quit">離開</button>'+
+    '<button id="next">下一題 →</button></div></div>';
+  const ob=r.querySelector("#opts");
+  q.opts.forEach((t,idx)=>{
+    const b=document.createElement("button");
+    b.className="opt";              /* 不預選任何選項 */
+    b.innerHTML="("+"ABCD"[idx]+") "+t;
+    b.onclick=()=>answer(idx,b);
+    ob.appendChild(b);
+  });
+  r.querySelector("#quit").onclick=renderStages;
+  r.querySelector("#next").onclick=()=>{cur.i++;paintQ();};
+}
+function answer(idx){
+  const q=cur.qs[cur.i], box=document.getElementById("opts");
+  if(box.dataset.locked) return;
+  box.dataset.locked="1";
+  [...box.children].forEach((b,k)=>{
+    if(k===q.ans) b.classList.add("right");
+    else if(k===idx) b.classList.add("wrong");
+    b.disabled=true;
+  });
+  if(idx===q.ans) cur.right++; else cur.wrong.push(q);
+  document.getElementById("exp").innerHTML='<div class="exp">'+(idx===q.ans?"✅ 答對":"❌ 答錯")+'　'+q.why+
+    '<div class="pt">考點：'+q.point+'　來源：'+q.src+'</div></div>';
+  document.getElementById("nav").classList.remove("hide");
+}
+function finish(){
+  const {st,qs,right,wrong}=cur;
+  const pct=Math.round(right/qs.length*100);
+  if(S.best[st.id]===undefined || pct>S.best[st.id]) S.best[st.id]=pct;
+  if(pct>=80) S.pass[st.id]=true;
+  save();
+  const r=document.getElementById("runner");
+  r.innerHTML='<div class="qcard res"><div class="big">'+pct+'%</div><p>'+right+' / '+qs.length+' 題答對</p><p>'+
+    (pct>=80?"✅ 通過，下一關已解鎖":"再練一次，答對 80% 就能開下一關")+'</p>'+
+    (wrong.length?'<div class="wrongbox"><b>錯題歸因</b><ul>'+wrong.map(w=>
+      '<li>'+w.q+'<br><span style="color:var(--dim)">→ '+w.why+' <b>['+w.point+'／'+w.src+']</b></span></li>').join("")+'</ul></div>':'')+
+    '<div class="nav"><button class="ghost" id="back">回關卡</button><button id="again">再練一次</button></div></div>';
+  r.querySelector("#back").onclick=renderStages;
+  r.querySelector("#again").onclick=()=>start(st);
+}
+/* ══════════ 單字練習（延續 super2500 的 hub 模式：認識單字／發音／聽力，另加拼字） ══════════ */
+const MODES=[
+  {id:"know",  cls:"m1", ico:"🎧", name:"認識單字", desc:"聽單字＋課本例句，正常速與慢速"},
+  {id:"listen",cls:"m3", ico:"🎯", name:"聽力測驗", desc:"聽發音，從四個中文選正確的"},
+  {id:"spell", cls:"m4", ico:"✍️", name:"拼字練習", desc:"聽發音＋看中文，把單字拼出來"},
+  {id:"speak", cls:"m2", ico:"🎤", name:"口說練習", desc:"跟著唸，讓瀏覽器聽你唸得對不對"}
+];
+function scopeWords(){
+  const v=document.getElementById("wscope").value;
+  return DATA.vocab.filter(function(w){ return v==="all" ? true : w.lesson===v; });
+}
+function renderModes(){
+  const box=document.getElementById("modes"); box.innerHTML="";
+  MODES.forEach(function(m){
+    const st=(S.wd&&S.wd[m.id])||{};
+    const el=document.createElement("div");
+    el.className="mode "+m.cls;
+    el.innerHTML='<div class="mico">'+m.ico+'</div><div class="minfo"><b>'+m.name+
+      '</b><span>'+m.desc+'</span></div><div class="badge '+(st.done?"pass":"")+'">'+
+      (st.best!==undefined ? (st.best+"%") : (st.done?"練過":"開始"))+'</div>';
+    el.onclick=function(){ startMode(m); };
+    box.appendChild(el);
+  });
+  document.getElementById("wrun").classList.add("hide");
+  box.classList.remove("hide");
+}
+document.getElementById("wscope").onchange=renderModes;
+
+/* TTS：說之前一律 cancel，避免上一句卡住 */
+let VOICE=null;
+function pickVoice(){
+  const vs=(typeof speechSynthesis!=="undefined" && speechSynthesis.getVoices())||[];
+  VOICE=vs.find(function(v){return /en-US/i.test(v.lang)&&/Google|Natural|Samantha|Zira/i.test(v.name);})
+      || vs.find(function(v){return /^en/i.test(v.lang);}) || null;
+}
+if(typeof speechSynthesis!=="undefined"){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(text, rate){
+  if(typeof speechSynthesis==="undefined") return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=rate||0.95; if(VOICE) u.voice=VOICE;
+  speechSynthesis.speak(u);
+}
+function markMode(id, patch){
+  S.wd=S.wd||{}; S.wd[id]=Object.assign({}, S.wd[id]||{}, patch); save();
+}
+
+let W=null;
+function startMode(m){
+  W={m:m, list:shuffle(scopeWords()), i:0, right:0, wrong:[]};
+  document.getElementById("modes").classList.add("hide");
+  document.getElementById("wrun").classList.remove("hide");
+  ({know:paintKnow, listen:paintListen, spell:paintSpell, speak:paintSpeak})[m.id]();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function wnav(){
+  return '<div class="nav"><button class="ghost" id="wquit">回單字選單</button>'+
+         '<button id="wnext">下一個 →</button></div>';
+}
+function bindNav(next){
+  const q=document.getElementById("wquit");
+  if(q) q.onclick=function(){ if(typeof speechSynthesis!=="undefined") speechSynthesis.cancel(); renderModes(); };
+  const b=document.getElementById("wnext");
+  if(b) b.onclick=function(){ W.i++; if(W.i>=W.list.length){ finishMode(); } else { next(); } };
+}
+function finishMode(){
+  const m=W.m, list=W.list, right=W.right, wrong=W.wrong;
+  const pct=list.length? Math.round(right/list.length*100):100;
+  const scored=(m.id==="listen"||m.id==="spell");
+  const prev=(S.wd&&S.wd[m.id]&&S.wd[m.id].best)||0;
+  markMode(m.id, scored? {done:true, best:Math.max(prev,pct)} : {done:true});
+  document.getElementById("wrun").innerHTML=
+    '<div class="wcard res">'+
+    (scored? '<div class="big">'+pct+'%</div><p>'+right+' / '+list.length+' 題答對</p>'
+           : '<div class="big">✓</div><p>這一輪 '+list.length+' 個字練完了</p>')+
+    (wrong.length? '<div class="wrongbox"><b>要再看一次的字</b><ul>'+wrong.map(function(w){
+        return '<li><b>'+w.word+'</b>（'+w.meaning+'）'+(w.ex?'<br><span style="color:var(--dim)">'+w.ex+'</span>':'')+'</li>';
+      }).join("")+'</ul></div>' : '')+
+    '<div class="nav"><button class="ghost" id="wquit">回單字選單</button><button id="wagain">再練一次</button></div></div>';
+  document.getElementById("wquit").onclick=renderModes;
+  document.getElementById("wagain").onclick=function(){ startMode(m); };
+}
+
+/* ① 認識單字 */
+function paintKnow(){
+  const w=W.list[W.i];
+  document.getElementById("wrun").innerHTML=
+    '<div class="bar"><i style="width:'+(W.i/W.list.length*100)+'%"></i></div>'+
+    '<div class="wcard"><div class="qhead"><span>🎧 認識單字</span><span>'+(W.i+1)+' / '+W.list.length+'</span></div>'+
+    '<div class="wword">'+w.word+'</div><div class="wpos">'+w.pos+(w.past?'　過去式：'+w.past:'')+'</div>'+
+    '<div class="wzh">'+w.meaning+'</div>'+
+    '<div class="spk"><button class="main" id="s1">🔊 唸單字</button><button id="s2">🐢 慢速</button>'+
+    (w.ex?'<button id="s3">🔊 唸例句</button>':'')+'</div>'+
+    (w.ex? '<div class="wex"><div class="en">'+w.ex+'</div><div class="zh">'+w.exz+'</div>'+
+           '<div class="src">課本出處：'+w.exs+'</div></div>' : '')+
+    wnav()+'</div>';
+  speak(w.word);
+  document.getElementById("s1").onclick=function(){ speak(w.word); };
+  document.getElementById("s2").onclick=function(){ speak(w.word,0.55); };
+  const s3=document.getElementById("s3");
+  if(s3) s3.onclick=function(){ speak(w.ex,0.9); };
+  bindNav(paintKnow);
+}
+
+/* ② 聽力測驗：聽發音選中文 */
+function paintListen(){
+  const w=W.list[W.i];
+  const others=pick(scopeWords().filter(function(x){return x.word!==w.word;}),3).map(function(x){return x.meaning;});
+  const opts=shuffle([w.meaning].concat(others));
+  document.getElementById("wrun").innerHTML=
+    '<div class="bar"><i style="width:'+(W.i/W.list.length*100)+'%"></i></div>'+
+    '<div class="wcard"><div class="qhead"><span>🎯 聽力測驗</span><span>'+(W.i+1)+' / '+W.list.length+'</span></div>'+
+    '<p class="tip">聽發音，選出正確的中文意思</p>'+
+    '<div class="spk"><button class="main" id="s1">🔊 再聽一次</button><button id="s2">🐢 慢速</button></div>'+
+    '<div id="opts"></div><div id="exp"></div>'+
+    '<div class="nav hide" id="nav"><button class="ghost" id="wquit">回單字選單</button>'+
+    '<button id="wnext">下一題 →</button></div></div>';
+  speak(w.word);
+  document.getElementById("s1").onclick=function(){ speak(w.word); };
+  document.getElementById("s2").onclick=function(){ speak(w.word,0.55); };
+  const ob=document.getElementById("opts");
+  opts.forEach(function(t,idx){
+    const b=document.createElement("button");
+    b.className="opt";
+    b.textContent="("+"ABCD"[idx]+") "+t;
+    b.onclick=function(){
+      if(ob.dataset.locked) return;
+      ob.dataset.locked="1";
+      const ans=opts.indexOf(w.meaning);
+      Array.prototype.forEach.call(ob.children,function(x,k){
+        if(k===ans) x.classList.add("right"); else if(k===idx) x.classList.add("wrong");
+        x.disabled=true;
+      });
+      if(idx===ans) W.right++; else W.wrong.push(w);
+      document.getElementById("exp").innerHTML='<div class="exp">'+(idx===ans?"✅ 答對":"❌ 答錯")+
+        '　<b>'+w.word+'</b>（'+w.pos+'）'+w.meaning+
+        (w.ex?'<br>'+w.ex+'<div class="pt">課本出處：'+w.exs+'</div>':'')+'</div>';
+      document.getElementById("nav").classList.remove("hide");
+    };
+    ob.appendChild(b);
+  });
+  bindNav(paintListen);
+}
+
+/* ③ 拼字練習 */
+function paintSpell(){
+  const w=W.list[W.i];
+  const masked=w.word.replace(/[A-Za-z]/g,"_");
+  document.getElementById("wrun").innerHTML=
+    '<div class="bar"><i style="width:'+(W.i/W.list.length*100)+'%"></i></div>'+
+    '<div class="wcard"><div class="qhead"><span>✍️ 拼字練習</span><span>'+(W.i+1)+' / '+W.list.length+'</span></div>'+
+    '<div class="wzh">'+w.meaning+'　<span style="font-size:14px;color:var(--dim)">('+w.pos+')</span></div>'+
+    '<div class="spk"><button class="main" id="s1">🔊 聽發音</button><button id="s2">🐢 慢速</button>'+
+    '<button id="s3">💡 提示首字母</button></div>'+
+    '<div class="sp-hint" id="hint">'+masked+'</div>'+
+    '<input class="sp-in" id="sp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="在這裡拼出單字">'+
+    '<div id="exp"></div>'+
+    '<div class="nav"><button class="ghost" id="wquit">回單字選單</button>'+
+    '<button id="chk">對答案</button><button id="wnext" class="hide">下一題 →</button></div></div>';
+  speak(w.word);
+  document.getElementById("s1").onclick=function(){ speak(w.word); };
+  document.getElementById("s2").onclick=function(){ speak(w.word,0.5); };
+  document.getElementById("s3").onclick=function(){
+    document.getElementById("hint").textContent=w.word.charAt(0)+w.word.slice(1).replace(/[A-Za-z]/g,"_");
+  };
+  const inp=document.getElementById("sp");
+  inp.focus();
+  function check(){
+    if(inp.disabled) return;
+    const got=inp.value.trim().toLowerCase().replace(/\s+/g," ");
+    const ok=(got===w.word.toLowerCase());
+    inp.disabled=true;
+    if(ok) W.right++; else W.wrong.push(w);
+    document.getElementById("exp").innerHTML='<div class="exp">'+(ok?"✅ 拼對了":"❌ 再看一次")+
+      '　正解：<b>'+w.word+'</b>'+(ok?"":'　你拼的：'+(got||"（空白）"))+
+      (w.ex?'<br>'+w.ex+'<div class="pt">課本出處：'+w.exs+'</div>':'')+'</div>';
+    document.getElementById("chk").classList.add("hide");
+    document.getElementById("wnext").classList.remove("hide");
+  }
+  document.getElementById("chk").onclick=check;
+  inp.addEventListener("keydown",function(e){ if(e.key==="Enter") check(); });
+  bindNav(paintSpell);
+}
+
+/* ④ 口說練習：SpeechRecognition，不支援就降成自我評估 */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+function norm(t){ return (t||"").toLowerCase().replace(/[^a-z ]/g," ").replace(/\s+/g," ").trim(); }
+function paintSpeak(){
+  const w=W.list[W.i];
+  const isFile=(location.protocol==="file:");
+  document.getElementById("wrun").innerHTML=
+    '<div class="bar"><i style="width:'+(W.i/W.list.length*100)+'%"></i></div>'+
+    '<div class="wcard"><div class="qhead"><span>🎤 口說練習</span><span>'+(W.i+1)+' / '+W.list.length+'</span></div>'+
+    '<div class="wword">'+w.word+'</div><div class="wzh">'+w.meaning+'</div>'+
+    '<div class="spk"><button class="main" id="s1">🔊 聽示範</button><button id="s2">🐢 慢速</button></div>'+
+    (SR? '<button class="mic" id="mic">🎤</button><p class="tip" id="tip">按麥克風，然後唸出這個字</p>'
+       : '<p class="tip">這個瀏覽器不支援語音辨識，改用<b>自我評估</b>：聽示範 → 自己唸 → 誠實按下方按鈕。建議用 Chrome。</p>')+
+    ((isFile&&SR)? '<p class="tip">⚠ 用檔案方式開啟時麥克風常被瀏覽器擋掉；若按了沒反應，請改用網頁版。</p>':'')+
+    '<div id="heard"></div>'+
+    '<div class="nav"><button class="ghost" id="wquit">回單字選單</button>'+
+    '<button id="ok2">我唸對了</button><button id="wnext">下一個 →</button></div></div>';
+  speak(w.word);
+  document.getElementById("s1").onclick=function(){ speak(w.word); };
+  document.getElementById("s2").onclick=function(){ speak(w.word,0.5); };
+  document.getElementById("ok2").onclick=function(){
+    W.right++; W.i++;
+    if(W.i>=W.list.length) finishMode(); else paintSpeak();
+  };
+  if(SR){
+    const mic=document.getElementById("mic"), tip=document.getElementById("tip");
+    mic.onclick=function(){
+      if(typeof speechSynthesis!=="undefined") speechSynthesis.cancel();
+      const rec=new SR();
+      rec.lang="en-US"; rec.interimResults=false; rec.maxAlternatives=3;
+      let done=false;
+      const guard=setTimeout(function(){
+        if(!done){ try{ rec.stop(); }catch(e){} tip.textContent="沒聽到聲音，再按一次試試"; mic.classList.remove("rec"); }
+      },12000);
+      rec.onstart=function(){ mic.classList.add("rec"); tip.textContent="說吧！"; };
+      rec.onerror=function(e){
+        done=true; clearTimeout(guard); mic.classList.remove("rec");
+        tip.textContent = e.error==="not-allowed" ? "麥克風被擋住了，請允許權限"
+          : e.error==="no-speech" ? "沒聽到聲音，再試一次"
+          : e.error==="network" ? "語音辨識需要網路連線" : "辨識失敗："+e.error;
+      };
+      rec.onresult=function(e){
+        done=true; clearTimeout(guard); mic.classList.remove("rec");
+        /* SpeechRecognitionResult 不可 for...of，一律索引存取 */
+        const r=e.results[0], alts=[];
+        for(let i=0;i<r.length;i++) alts.push(r[i].transcript);
+        const target=norm(w.word);
+        const hit=alts.some(function(a){
+          const n=norm(a);
+          return n===target || n.split(" ").indexOf(target)>=0 || n.indexOf(target)>=0;
+        });
+        if(hit) W.right++; else W.wrong.push(w);
+        document.getElementById("heard").innerHTML='<div class="heard">'+(hit?"✅ 聽起來很標準！":"🔁 再試一次")+
+          '<br>我聽到的：<b>'+(alts[0]||"（空）")+'</b><br>正解：<b>'+w.word+'</b></div>';
+        tip.textContent="可以再按一次多練幾遍";
+      };
+      try{ rec.start(); }catch(err){ tip.textContent="無法啟動麥克風："+err.message; }
+    };
+  }
+  bindNav(paintSpeak);
+}
+
+</script>
+</body>
+</html>
