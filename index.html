@@ -139,6 +139,10 @@ th{background:var(--ab,var(--hi));font-weight:700;color:var(--a,var(--deep))}
 .mlink{display:block;padding:11px 13px;margin:8px 0;border:1px solid var(--line);border-radius:10px;
        background:var(--c5b);color:var(--ink) !important;font-weight:700;font-size:14.5px;text-decoration:none}
 .mlink:hover{border-color:var(--c5)}
+.netonly{font-size:11px;font-weight:400;background:var(--c5b);color:var(--c5);
+   padding:2px 7px;border-radius:20px;margin-left:8px;vertical-align:middle}
+.offbar{background:#fff7ed;border:1px solid #fcd34d;border-radius:10px;padding:9px 12px;
+   margin:10px 0;font-size:13.5px;color:#92400e}
 .mnote{font-size:12.5px;color:var(--dim);margin-top:10px;line-height:1.8}
 
 /* ── 單字練習 ── */
@@ -185,11 +189,12 @@ footer{text-align:center;color:var(--dim);font-size:12px;padding:26px 10px;line-
 <header>
   <h1>南一版　國中英語　第三冊（八年級上學期）</h1>
   <p>Lesson 1（課本 p.1–16）・Lesson 2（課本 p.17–32）・Review 1（p.33–36）</p>
-  <p class="ver">版本 2026-09-02 10:05　｜　若畫面沒更新，請按 Ctrl+F5 重新整理</p>
+  <p class="ver">版本 2026-09-02 13:17　｜　若畫面沒更新，請按 Ctrl+F5 重新整理</p>
   <button id="installbtn" class="hide">📲 安裝到手機主畫面</button>
   <p class="ios hide" id="iostip">iPhone：按下方 <b>分享</b> → <b>加入主畫面</b>，就會變成一個 app 圖示。</p>
 </header>
 <div class="wrap">
+  <div id="offbar" class="offbar hide">📴 目前離線——教學、單字練習、小考都照常使用；只有「課本影音」和「口說辨識」需要連網。</div>
   <div class="tabs">
     <div class="tab on" data-tab="tb">📘 課本教學</div>
     <div class="tab" data-tab="ex">🔍 會考重點</div>
@@ -601,8 +606,9 @@ footer{text-align:center;color:var(--dim);font-size:12px;padding:26px 10px;line-
     </div>
     <div class="modes" id="modes"></div>
     <div class="media">
-      <b>📺 課本 QR code 的官方影音</b>
-      <p>下面這些是掃課本頁面上的 QR code 得到的南一官方連結，點了會開新分頁。</p>
+      <b>📺 課本 QR code 的官方影音<span class="netonly">需要網路</span></b>
+      <p>下面這些是掃課本頁面上的 QR code 得到的南一官方連結，點了會開新分頁。
+        <b>其餘功能（教學、單字四練、小考）離線都能用。</b></p>
       <a class="mlink" href="http://video.nani.com.tw/B3L1-info" target="_blank" rel="noopener">
         🎬 Lesson 1 課文動畫（課本 p.4 的 QR）</a>
       <a class="mlink" href="http://video.nani.com.tw/B3L2-info" target="_blank" rel="noopener">
@@ -661,6 +667,13 @@ function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} 
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(function(){ deferredPrompt=null; b.classList.add("hide"); });
   };
+})();
+
+/* 離線提示：裝成 app 之後沒網路照樣能用，只是兩個功能會降級 */
+(function(){
+  const bar=document.getElementById("offbar");
+  const sync=function(){ if(bar) bar.classList.toggle("hide", navigator.onLine); };
+  window.addEventListener("online", sync); window.addEventListener("offline", sync); sync();
 })();
 
 document.querySelectorAll(".tab").forEach(t=>{
@@ -1013,8 +1026,10 @@ function paintSpeak(){
     '<div class="wcard"><div class="qhead"><span>🎤 口說練習</span><span>'+(W.i+1)+' / '+W.list.length+'</span></div>'+
     '<div class="wword">'+w.word+'</div><div class="wzh">'+w.meaning+'</div>'+
     '<div class="spk"><button class="main" id="s1">🔊 聽示範</button><button id="s2">🐢 慢速</button></div>'+
-    (SR? '<button class="mic" id="mic">🎤</button><p class="tip" id="tip">按麥克風，然後唸出這個字</p>'
-       : '<p class="tip">這個瀏覽器不支援語音辨識，改用<b>自我評估</b>：聽示範 → 自己唸 → 誠實按下方按鈕。建議用 Chrome。</p>')+
+    ((SR && navigator.onLine)
+       ? '<button class="mic" id="mic">🎤</button><p class="tip" id="tip">按麥克風，然後唸出這個字</p>'
+       : (SR ? '<p class="tip">📴 <b>目前離線</b>，語音辨識需要連網。改用<b>自我評估</b>：聽示範 → 自己唸 → 覺得像就按「我唸對了」。<br>（發音示範是離線的，照樣能聽。）</p>'
+             : '<p class="tip">這個瀏覽器不支援語音辨識，改用<b>自我評估</b>：聽示範 → 自己唸 → 誠實按下方按鈕。建議用 Chrome。</p>'))+
     ((isFile&&SR)? '<p class="tip">⚠ 用檔案方式開啟時麥克風常被瀏覽器擋掉；若按了沒反應，請改用網頁版。</p>':'')+
     '<div id="heard"></div>'+
     '<div class="nav"><button class="ghost" id="wquit">回單字選單</button>'+
@@ -1026,7 +1041,7 @@ function paintSpeak(){
     W.right++; W.i++;
     if(W.i>=W.list.length) finishMode(); else paintSpeak();
   };
-  if(SR){
+  if(SR && navigator.onLine){
     const mic=document.getElementById("mic"), tip=document.getElementById("tip");
     mic.onclick=function(){
       if(typeof speechSynthesis!=="undefined") speechSynthesis.cancel();
